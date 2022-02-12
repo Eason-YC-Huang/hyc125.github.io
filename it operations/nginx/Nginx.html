@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh-Hans-CN"><head><meta charset="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=Edge"/><link rel="stylesheet" type="text/css" href="../../css/modern-norm.min.css"/><link rel="stylesheet" type="text/css" href="../../css/prism.min.css"/><link rel="stylesheet" type="text/css" href="../../css/katex.min.css"/><link rel="stylesheet" type="text/css" href="../../css/wolai.css"/><title>Nginx - wolai 笔记</title><link rel="shortcut icon"></link></head><body><header><div class="image"></div><div class="title"><div class="banner"><div class="icon"></div></div><div data-title="Nginx" class="main-title"></div></div></header><article><h2 class="wolai-block"><span class="inline-wrap">简介</span></h2><div class="wolai-block wolai-text"><div><span class="inline-wrap">nginx<span class="jill"></span>拥有一个主进程和一组工作进程。主进程负责读取和解析配置以及维护工作进程。工作进程则用来处理请求。</span></div></div><h2 class="wolai-block"><span class="inline-wrap">运行<span class="jill"></span>nginx</span></h2><div class="wolai-block wolai-text"><div><span class="inline-wrap">通过可执行文件启动<span class="jill"></span>nginx，nginx<span class="jill"></span>启动后，你可以通过以下命令来控制它。</span></div></div><code-block class="wolai-block"><div class="wolai-pre"><div data-lang="PowerShell" class="marker"></div><pre>nginx <span class="token operator">-</span>s option
+<span class="token comment"># stop — fast shutdown</span>
+<span class="token comment"># quit — graceful shutdown</span>
+<span class="token comment"># reload — reloading the configuration file</span>
+<span class="token comment"># 读取并验证配置文件，如果通过则创建新的工作进程，并且通知旧的工作进程退出</span>
+<span class="token comment"># reopen — reopening the log files</span></pre></div></code-block><div class="wolai-block wolai-text"><div><span class="inline-wrap">更多详情请看</span><span class="inline-wrap"><a href="http://nginx.org/en/docs/control.html"><span>控制<span class="jill"></span>nginx</span></a></span></div></div><h2 class="wolai-block"><span class="inline-wrap">配置文件基本结构</span></h2><div class="wolai-block wolai-text"><div><span class="inline-wrap">nginx<span class="jill"></span>的配置文件默认叫做</span><span class="inline-wrap"><code>nginx.conf</code></span><span class="inline-wrap">，分别存放在</span><span class="inline-wrap"><code>/usr/local/nginx/conf</code></span><span class="inline-wrap">, </span><span class="inline-wrap"><code>/etc/nginx</code></span><span class="inline-wrap">,  </span><span class="inline-wrap"><code>/usr/local/etc/nginx</code></span><span class="inline-wrap">等目录下。</span></div></div><div class="wolai-block wolai-text"><div><span class="inline-wrap"><code>nginx</code></span><span class="inline-wrap">由多个模块所组成，模块的行为通过配置文件中编写的指令来控制。指令分为两种，简单指令和块指令。</span></div></div><code-block class="wolai-block"><div class="wolai-pre"><div data-lang="Nginx" class="marker"></div><pre><span class="token comment"># 简单指令 name parameters;</span>
+<span class="token directive"><span class="token keyword">worker_processes</span> auto</span><span class="token punctuation">;</span>
+<span class="token comment"># 块指令</span>
+<span class="token directive"><span class="token keyword">events</span></span> <span class="token punctuation">{</span>
+    <span class="token directive"><span class="token keyword">worker_connections</span> <span class="token number">768</span></span><span class="token punctuation">;</span>
+    <span class="token comment"># multi_accept on;</span>
+<span class="token punctuation">}</span>
+<span class="token comment"># If a block directive can have other directives inside braces, it is called a context (examples: events, http, server, and location).</span>
+<span class="token comment"># Directives placed in the configuration file outside of any contexts are considered to be in the main context.The events and http directives reside in the main context, server in http, and location in server.</span></pre></div></code-block><h2 class="wolai-block"><span class="inline-wrap">提供静态资源</span></h2><div class="wolai-block wolai-text"><div><span class="inline-wrap">Web<span class="jill"></span>服务器的一个基本功能就是提供静态资源。</span></div></div><code-block class="wolai-block"><div class="wolai-pre"><div data-lang="PowerShell" class="marker"></div><pre>mkdir <span class="token operator">-</span>p <span class="token operator">/</span><span class="token keyword">data</span><span class="token operator">/</span>www <span class="token comment"># 存放html</span>
+mkdir <span class="token operator">-</span>p <span class="token operator">/</span><span class="token keyword">data</span><span class="token operator">/</span>images <span class="token comment"># 存放图片</span></pre></div></code-block><div class="wolai-block wolai-text"><div><span class="inline-wrap">修改</span><span class="inline-wrap"><code>nginx.conf</code></span><span class="inline-wrap">，在</span><span class="inline-wrap"><code>http{}</code></span><span class="inline-wrap">中添加以下内容</span></div></div><code-block class="wolai-block"><div class="wolai-pre"><div data-lang="Nginx" class="marker"></div><pre><span class="token directive"><span class="token keyword">server</span></span> <span class="token punctuation">{</span>
+    <span class="token directive"><span class="token keyword">location</span> /</span> <span class="token punctuation">{</span>
+        <span class="token directive"><span class="token keyword">root</span> /data/www</span><span class="token punctuation">;</span> 
+        <span class="token comment"># root 设置请求的根目录</span>
+        <span class="token comment"># location /i/ {</span>
+     <span class="token comment">#   root /data/w3;</span>
+    <span class="token comment"># } </span>
+        <span class="token comment"># 请求 “/i/top.gif” 返回 /data/w3/i/top.gif</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token directive"><span class="token keyword">location</span> /images/</span> <span class="token punctuation">{</span>
+        <span class="token directive"><span class="token keyword">root</span> /data</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></pre></div></code-block><code-block class="wolai-block"><div class="wolai-pre"><div data-lang="Nginx" class="marker"></div><pre><span class="token comment"># 把http中的这两行指令注释掉，它们是用来导入配置的</span>
+<span class="token comment"># include /etc/nginx/conf.d/*.conf;</span>
+<span class="token comment"># include /etc/nginx/sites-enabled/*;</span></pre></div></code-block><code-block class="wolai-block"><div class="wolai-pre"><div data-lang="PowerShell" class="marker"></div><pre><span class="token comment"># 重新读取配置</span>
+nginx <span class="token operator">-</span>s reload</pre></div></code-block><h2 class="wolai-block"><span class="inline-wrap">代理服务器</span></h2><div class="wolai-block wolai-text"><div><span class="inline-wrap">We will configure a basic proxy server, which serves requests of images with files from the local directory and sends all other requests to a proxied server.</span></div></div><code-block class="wolai-block"><div class="wolai-pre"><div data-lang="PowerShell" class="marker"></div><pre>server <span class="token punctuation">{</span>
+  location <span class="token operator">/</span> <span class="token punctuation">{</span>
+    proxy_pass http:<span class="token operator">/</span><span class="token operator">/</span>localhost:8080<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token comment"># ~ 后面跟的是正则表达式</span>
+  location ~ \<span class="token punctuation">.</span><span class="token punctuation">(</span>gif<span class="token punctuation">|</span>jpg<span class="token punctuation">|</span>png<span class="token punctuation">)</span>$ <span class="token punctuation">{</span>
+      root <span class="token operator">/</span><span class="token keyword">data</span><span class="token operator">/</span>images<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  
+<span class="token punctuation">}</span>
+
+配置监听的路径，例如：location <span class="token operator">/</span>jenkins<span class="token operator">/</span>
+设置代理proxy_pass http:<span class="token operator">/</span><span class="token operator">/</span>127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1:8081<span class="token punctuation">;</span>
+proxy_pass设置的代理链接根据后方是否有<span class="token operator">/</span>表现不一。
+如果带<span class="token operator">/</span><span class="token punctuation">,</span>当请求http:<span class="token operator">/</span><span class="token operator">/</span>www<span class="token punctuation">.</span>test<span class="token punctuation">.</span>com<span class="token operator">/</span>jenkins<span class="token operator">/</span>abc<span class="token punctuation">,</span>最终代理到的地址会：http:<span class="token operator">/</span><span class="token operator">/</span>127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1:8081<span class="token operator">/</span>abc
+如果不带<span class="token operator">/</span><span class="token punctuation">,</span>当请求http:<span class="token operator">/</span><span class="token operator">/</span>www<span class="token punctuation">.</span>test<span class="token punctuation">.</span>com<span class="token operator">/</span>jenkins<span class="token operator">/</span>abc<span class="token punctuation">,</span>最终代理到的地址会：http:<span class="token operator">/</span><span class="token operator">/</span>127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1:8081<span class="token operator">/</span>jenkins<span class="token operator">/</span>abc
+
+
+<span class="token comment">#添加一个新的server</span>
+server <span class="token punctuation">{</span>
+  <span class="token comment"># 监听8080端口，不设置的话默认80端口</span>
+    listen 8080<span class="token punctuation">;</span> 
+    <span class="token comment"># 如果location中没有设置root指令，默认使用这个</span>
+    root <span class="token operator">/</span><span class="token keyword">data</span><span class="token operator">/</span>tomcat<span class="token punctuation">;</span> 
+    <span class="token comment"># 所有请求映射到/data/tomcat目录</span>
+    location <span class="token operator">/</span> <span class="token punctuation">{</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></pre></div></code-block><div class="wolai-block wolai-text"><div><span class="inline-wrap"><a href="http://nginx.org/en/docs/http/ngx_http_proxy_module.html"><span>更多代理相关的指令</span></a></span></div></div></article><footer></footer></body></html>

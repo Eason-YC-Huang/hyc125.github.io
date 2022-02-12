@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="zh-Hans-CN"><head><meta charset="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=Edge"/><link rel="stylesheet" type="text/css" href="../../../css/modern-norm.min.css"/><link rel="stylesheet" type="text/css" href="../../../css/prism.min.css"/><link rel="stylesheet" type="text/css" href="../../../css/katex.min.css"/><link rel="stylesheet" type="text/css" href="../../../css/wolai.css"/><title>1.Gradle入门 - wolai 笔记</title><link rel="shortcut icon" href="data:image/svg+xml,%3Csvg xmlns=&apos;http://www.w3.org/2000/svg&apos; viewBox=&apos;0 0 800 800&apos;%3E%3Cdefs%3E%3Cstyle%3E.cls-1%7Bfill:%23fff;%7D%3C/style%3E%3C/defs%3E%3Cg%3E%3Cpath class=&apos;cls-1&apos; d=&apos;M610.08,0c66,0,90,6.88,114.13,19.79a134.62,134.62,0,0,1,56,56l2.28,4.4C793.93,103,800,127.88,800,189.92V610.08l-.08,11.56c-.78,57.38-7.58,79.89-19.71,102.57a134.62,134.62,0,0,1-56,56l-4.4,2.28C697,793.93,672.12,800,610.08,800H189.92l-11.56-.08c-57.38-.78-79.89-7.58-102.57-19.71a134.62,134.62,0,0,1-56-56l-2.28-4.4C6.44,697.75.4,673.72,0,616L0,189.92c0-66,6.88-90,19.79-114.13a134.62,134.62,0,0,1,56-56l4.4-2.28C102.25,6.44,126.28.4,184,0Z&apos;/%3E%3Cpath d=&apos;M610.08,0c66,0,90,6.88,114.13,19.79a134.62,134.62,0,0,1,56,56l2.28,4.4C793.93,103,800,127.88,800,189.92V610.08l-.08,11.56c-.78,57.38-7.58,79.89-19.71,102.57a134.62,134.62,0,0,1-56,56l-4.4,2.28C697,793.93,672.12,800,610.08,800H189.92l-11.56-.08c-57.38-.78-79.89-7.58-102.57-19.71a134.62,134.62,0,0,1-56-56l-2.28-4.4C6.44,697.75.4,673.72,0,616L0,189.92c0-66,6.88-90,19.79-114.13a134.62,134.62,0,0,1,56-56l4.4-2.28C102.25,6.44,126.28.4,184,0Zm4.72,88.9H185.2L172.42,89c-32.78.62-43.68,3.24-54.71,9.14a45.84,45.84,0,0,0-19.54,19.54c-6.61,12.36-9.11,24.55-9.27,67.49V614.8L89,627.58c.62,32.78,3.24,43.68,9.14,54.71a45.84,45.84,0,0,0,19.54,19.54c12.36,6.61,24.55,9.11,67.49,9.27H610.08c46.79,0,59.41-2.44,72.21-9.28a45.84,45.84,0,0,0,19.54-19.54c6.61-12.36,9.11-24.55,9.27-67.49V189.92c0-46.79-2.44-59.41-9.28-72.21a45.84,45.84,0,0,0-19.54-19.54C669.93,91.56,657.74,89.06,614.8,88.9ZM233.33,493.33A73.34,73.34,0,1,1,160,566.67,73.35,73.35,0,0,1,233.33,493.33Z&apos;/%3E%3C/g%3E%3C/svg%3E"></link></head><body><header><div class="image"></div><div class="title"><div class="banner"><div class="icon"></div></div><div data-title="1.Gradle入门" class="main-title"></div></div></header><article><ul class="wolai-block"><li><div class="marker"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 14.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5z"></path></svg></div><span class="inline-wrap">JDK 8 或以上</span></li><li><div class="marker"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 14.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5z"></path></svg></div><span class="inline-wrap">Gradle 5.0 或以上</span></li></ul><h1 class="wolai-block"><span class="inline-wrap">构建基础<span class="jill"></span>Gradle<span class="jill"></span>项目</span></h1><h2 class="wolai-block"><span class="inline-wrap">初始化项目</span></h2><code-block class="wolai-block"><div class="wolai-pre"><div data-lang="PowerShell" class="marker"></div><pre><span class="token comment"># $_is a special parameter that holds the last argument of the previous command. </span>
+mkdir <span class="token operator">-</span>p ~<span class="token operator">/</span>Desktop<span class="token operator">/</span>gradle<span class="token operator">/</span>basic<span class="token operator">-</span>demo &amp;&amp; cd <span class="token string">"<span class="token variable">$_</span>"</span>
+<span class="token comment"># Gradle提供了一个叫Build Init的插件，用来生成项目</span>
+<span class="token comment"># 初始化gradle项目</span>
+gradle init
+<span class="token comment"># 结果</span>
+├── build<span class="token punctuation">.</span>gradle <span class="token comment"># 配置当前项目的Gradle脚本</span>
+├── gradle        
+│   └── wrapper  <span class="token comment"># 包装器，</span>
+│       ├── gradle<span class="token operator">-</span>wrapper<span class="token punctuation">.</span>jar
+│       └── gradle<span class="token operator">-</span>wrapper<span class="token punctuation">.</span>properties
+├── gradlew      <span class="token comment">#  </span>
+├── gradlew<span class="token punctuation">.</span>bat  <span class="token comment">#</span>
+└── settings<span class="token punctuation">.</span>gradle <span class="token comment"># 用来配置Gradle构建的设置脚本</span></pre></div></code-block><h2 class="wolai-block"><span class="inline-wrap">创建任务</span></h2><div class="wolai-block wolai-text"><div><span class="inline-wrap">Gradle<span class="jill"></span>提供了一些<span class="jill"></span>API，用来创建和配置任务(task)，简单来说任务就是用来执行某些操作。</span></div></div><div class="wolai-block wolai-text"><div><span class="inline-wrap">下面我们通过编写一个复制目录的任务来体验一下</span></div></div><code-block class="wolai-block"><div class="wolai-pre"><div data-lang="PowerShell" class="marker"></div><pre><span class="token comment"># 前期准备</span>
+mkdir src
+<span class="token comment"># 用单引号:原样输出字符串，不进行转义或取变量</span>
+<span class="token function">echo</span> <span class="token string">'hello world!'</span> > <span class="token punctuation">.</span><span class="token operator">/</span>src<span class="token operator">/</span>myFile<span class="token punctuation">.</span>txt
+<span class="token comment"># echo "hello world\!" > ./src/myFile.txt</span></pre></div></code-block><code-block class="wolai-block"><div class="wolai-pre"><div data-lang="Groovy" class="marker"></div><pre><span class="token comment">// 编写任务 build.gradle</span>
+task <span class="token function">copy</span><span class="token punctuation">(</span>type<span class="token punctuation">:</span> Copy<span class="token punctuation">,</span> group<span class="token punctuation">:</span> <span class="token string gstring gstring gstring gstring gstring gstring gstring gstring gstring gstring">"Custom"</span><span class="token punctuation">,</span> 
+          description<span class="token punctuation">:</span> <span class="token string gstring gstring gstring gstring gstring gstring gstring gstring gstring gstring">"Copies sources to the dest directory"</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    from <span class="token string gstring gstring gstring gstring gstring gstring gstring gstring gstring gstring">"src"</span>
+    into <span class="token string gstring gstring gstring gstring gstring gstring gstring gstring gstring gstring">"dest"</span>
+<span class="token punctuation">}</span></pre></div></code-block><code-block class="wolai-block"><div class="wolai-pre"><div data-lang="PowerShell" class="marker"></div><pre><span class="token comment"># 运行任务</span>
+<span class="token punctuation">.</span><span class="token operator">/</span>gradlew <span class="token function">copy</span></pre></div></code-block><div class="wolai-block wolai-text"><div><span class="inline-wrap">再写一个任务</span></div></div><code-block class="wolai-block"><div class="wolai-pre"><div data-lang="Groovy" class="marker"></div><pre><span class="token comment">// build.gradle</span>
+task <span class="token function">zip</span><span class="token punctuation">(</span>type<span class="token punctuation">:</span> Zip<span class="token punctuation">,</span> group<span class="token punctuation">:</span> <span class="token string gstring gstring gstring gstring gstring gstring gstring gstring gstring gstring">"Archive"</span><span class="token punctuation">,</span> description<span class="token punctuation">:</span> <span class="token string gstring gstring gstring gstring gstring gstring gstring gstring gstring gstring">"Archives sources in a zip file"</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    from <span class="token string gstring gstring gstring gstring gstring gstring gstring gstring gstring gstring">"src"</span>
+    setArchiveName <span class="token string gstring gstring gstring gstring gstring gstring gstring gstring gstring gstring">"basic-demo-1.0.zip"</span>
+<span class="token punctuation">}</span></pre></div></code-block><code-block class="wolai-block"><div class="wolai-pre"><div data-lang="PowerShell" class="marker"></div><pre><span class="token comment"># 运行任务</span>
+<span class="token punctuation">.</span><span class="token operator">/</span>gradlew zip</pre></div></code-block><h2 class="wolai-block"><span class="inline-wrap">查看所有任务</span></h2><code-block class="wolai-block"><div class="wolai-pre"><div data-lang="PowerShell" class="marker"></div><pre><span class="token punctuation">.</span><span class="token operator">/</span>gradlew tasks</pre></div></code-block><code-block class="wolai-block"><div class="wolai-pre"><div data-lang="PowerShell" class="marker"></div><pre>$ basic<span class="token operator">-</span>demo  <span class="token punctuation">.</span><span class="token operator">/</span>gradlew tasks
+
+> Task :tasks
+
+<span class="token operator">--</span>-<span class="token operator">--</span>-<span class="token operator">--</span>-<span class="token operator">--</span>-<span class="token operator">--</span>-<span class="token operator">--</span>-<span class="token operator">--</span>-<span class="token operator">--</span>-<span class="token operator">--</span>-<span class="token operator">--</span>-<span class="token operator">--</span>-<span class="token operator">--</span>-<span class="token operator">--</span>-<span class="token operator">--</span>-<span class="token operator">--</span>-<span class="token operator">--</span>-<span class="token operator">--</span>-<span class="token operator">--</span>-<span class="token operator">--</span>-<span class="token operator">--</span><span class="token operator">-</span>
+Tasks runnable <span class="token keyword">from</span> root project
+<span class="token operator">--</span>-<span class="token operator">--</span>-<span class="token operator">--</span>-<span class="token operator">--</span>-<span class="token operator">--</span>-<span class="token operator">--</span>-<span class="token operator">--</span>-<span class="token operator">--</span>-<span class="token operator">--</span>-<span class="token operator">--</span>-<span class="token operator">--</span>-<span class="token operator">--</span>-<span class="token operator">--</span>-<span class="token operator">--</span>-<span class="token operator">--</span>-<span class="token operator">--</span>-<span class="token operator">--</span>-<span class="token operator">--</span>-<span class="token operator">--</span>-<span class="token operator">--</span><span class="token operator">-</span>
+
+Build Setup tasks
+<span class="token operator">--</span>-<span class="token operator">--</span>-<span class="token operator">--</span>-<span class="token operator">--</span>-<span class="token operator">--</span>-<span class="token operator">--</span>
+init <span class="token operator">-</span> Initializes a new Gradle build<span class="token punctuation">.</span>
+wrapper <span class="token operator">-</span> Generates Gradle wrapper files<span class="token punctuation">.</span>
+
+Custom tasks
+<span class="token operator">--</span>-<span class="token operator">--</span>-<span class="token operator">--</span>-<span class="token operator">--</span><span class="token operator">-</span>
+<span class="token function">copy</span> <span class="token operator">-</span> Copies sources to the dest directory
+
+Help tasks
+<span class="token operator">--</span>-<span class="token operator">--</span>-<span class="token operator">--</span>-<span class="token operator">-</span>
+buildEnvironment <span class="token operator">-</span> Displays all buildscript dependencies declared in root project <span class="token string">'basic-demo'</span><span class="token punctuation">.</span>
+components <span class="token operator">-</span> Displays the components produced by root project <span class="token string">'basic-demo'</span><span class="token punctuation">.</span> <span class="token namespace">[incubating]</span>
+dependencies <span class="token operator">-</span> Displays all dependencies declared in root project <span class="token string">'basic-demo'</span><span class="token punctuation">.</span>
+dependencyInsight <span class="token operator">-</span> Displays the insight into a specific dependency in root project <span class="token string">'basic-demo'</span><span class="token punctuation">.</span>
+dependentComponents <span class="token operator">-</span> Displays the dependent components of components in root project <span class="token string">'basic-demo'</span><span class="token punctuation">.</span> <span class="token namespace">[incubating]</span>
+help <span class="token operator">-</span> Displays a help message<span class="token punctuation">.</span>
+model <span class="token operator">-</span> Displays the configuration model of root project <span class="token string">'basic-demo'</span><span class="token punctuation">.</span> <span class="token namespace">[incubating]</span>
+projects <span class="token operator">-</span> Displays the sub<span class="token operator">-</span>projects of root project <span class="token string">'basic-demo'</span><span class="token punctuation">.</span>
+properties <span class="token operator">-</span> Displays the properties of root project <span class="token string">'basic-demo'</span><span class="token punctuation">.</span>
+tasks <span class="token operator">-</span> Displays the tasks runnable <span class="token keyword">from</span> root project <span class="token string">'basic-demo'</span><span class="token punctuation">.</span>
+
+To see all tasks and more detail<span class="token punctuation">,</span> run gradlew tasks <span class="token operator">--</span>all
+
+To see more detail about a task<span class="token punctuation">,</span> run gradlew help <span class="token operator">--</span>task &lt;task></pre></div></code-block><h1 class="wolai-block"><span class="inline-wrap">Gradle<span class="jill"></span>构建<span class="jill"></span>Java<span class="jill"></span>项目</span></h1><h2 class="wolai-block"><span class="inline-wrap">初始化项目</span></h2><code-block class="wolai-block"><div class="wolai-pre"><div data-lang="PowerShell" class="marker"></div><pre>mkdir javaApp &amp;&amp; cd <span class="token string">"<span class="token variable">$_</span>"</span>
+gradle init <span class="token comment"># 选择 java application 、DSL 、 选择测试框架  设置项目名、 设置包名</span>
+☁  javaApp  gradle init
+
+<span class="token function">Select</span> <span class="token function">type</span> of project to generate:
+  1: basic
+  2: <span class="token function">cpp</span><span class="token operator">-</span>application
+  3: <span class="token function">cpp</span><span class="token operator">-</span>library
+  4: groovy<span class="token operator">-</span>application
+  5: groovy<span class="token operator">-</span>library
+  6: java<span class="token operator">-</span>application
+  7: java<span class="token operator">-</span>library
+  8: kotlin<span class="token operator">-</span>application
+  9: kotlin<span class="token operator">-</span>library
+  10: scala<span class="token operator">-</span>library
+Enter selection <span class="token punctuation">(</span>default: basic<span class="token punctuation">)</span> <span class="token punctuation">[</span>1<span class="token punctuation">.</span><span class="token punctuation">.</span>10<span class="token punctuation">]</span> 6
+
+<span class="token function">Select</span> build script DSL:
+  1: groovy
+  2: kotlin
+Enter selection <span class="token punctuation">(</span>default: groovy<span class="token punctuation">)</span> <span class="token punctuation">[</span>1<span class="token punctuation">.</span><span class="token punctuation">.</span>2<span class="token punctuation">]</span> 1
+
+<span class="token function">Select</span> test framework:
+  1: junit
+  2: testng
+  3: spock
+Enter selection <span class="token punctuation">(</span>default: junit<span class="token punctuation">)</span> <span class="token punctuation">[</span>1<span class="token punctuation">.</span><span class="token punctuation">.</span>3<span class="token punctuation">]</span> 1
+
+Project name <span class="token punctuation">(</span>default: javaApp<span class="token punctuation">)</span>: gradle<span class="token operator">-</span>java<span class="token operator">-</span>app
+Source package <span class="token punctuation">(</span>default: gradle<span class="token punctuation">.</span>java<span class="token punctuation">.</span>app<span class="token punctuation">)</span>: com<span class="token punctuation">.</span>hdr<span class="token punctuation">.</span>app
+
+BUILD SUCCESSFUL in 50s
+2 actionable tasks: 2 executed
+
+tree <span class="token comment"># 查看当前目录结构</span>
+☁  javaApp  tree
+<span class="token punctuation">.</span>
+├── build<span class="token punctuation">.</span>gradle
+├── gradle
+│   └── wrapper
+│       ├── gradle<span class="token operator">-</span>wrapper<span class="token punctuation">.</span>jar
+│       └── gradle<span class="token operator">-</span>wrapper<span class="token punctuation">.</span>properties
+├── gradlew
+├── gradlew<span class="token punctuation">.</span>bat
+├── settings<span class="token punctuation">.</span>gradle
+└── src
+    ├── main
+    │   ├── java
+    │   │   └── com
+    │   │       └── hdr
+    │   │           └── app
+    │   │               └── App<span class="token punctuation">.</span>java
+    │   └── resources
+    └── test
+        ├── java
+        │   └── com
+        │       └── hdr
+        │           └── app
+        │               └── AppTest<span class="token punctuation">.</span>java
+        └── resources
+<span class="token comment"># 查看两个配置文件</span>
+<span class="token function">cat</span> settings<span class="token punctuation">.</span>gradle
+<span class="token function">cat</span> build<span class="token punctuation">.</span>gradle
+<span class="token comment"># 查看Gradle自动生成的代码 </span>
+<span class="token function">cat</span> <span class="token punctuation">.</span><span class="token operator">/</span>src<span class="token operator">/</span>main<span class="token operator">/</span>java<span class="token operator">/</span>com<span class="token operator">/</span>hdr<span class="token operator">/</span>app<span class="token operator">/</span>App<span class="token punctuation">.</span>java
+<span class="token function">cat</span> <span class="token punctuation">.</span><span class="token operator">/</span>src<span class="token operator">/</span>test<span class="token operator">/</span>java<span class="token operator">/</span>com<span class="token operator">/</span>hdr<span class="token operator">/</span>app<span class="token operator">/</span>AppTest<span class="token punctuation">.</span>java</pre></div></code-block><h2 class="wolai-block"><span class="inline-wrap">运行项目</span></h2><code-block class="wolai-block"><div class="wolai-pre"><div data-lang="PowerShell" class="marker"></div><pre><span class="token comment"># gradlew 和 gradle的区别</span>
+<span class="token comment"># gradlew是Gradle Wrapper，这东西是在用gradle创建项目的时候生成的，为什么要这个东西？ 因为不同版本的gradle的配置可能有点出入，这个东西在生成的时候就会绑定某个版本的gradle，从而避免上面说所的问题，而且通过使用gradlew，我们甚至无需下载gradle也能执行gradle命名</span>
+
+<span class="token punctuation">.</span><span class="token operator">/</span>gradlew build <span class="token comment"># 打包</span>
+tree <span class="token comment"># 查看打包后目录结构</span>
+<span class="token punctuation">.</span><span class="token operator">/</span>gradlew tasks <span class="token comment"># 查看有哪些任务可以执行</span>
+<span class="token punctuation">.</span><span class="token operator">/</span>gradlew run <span class="token comment"># 运行该项目</span>
+<span class="token comment"># build/reports/tests/test/index.html  查看测试报告</span></pre></div></code-block><h1 class="wolai-block"><span class="inline-wrap">Gradle<span class="jill"></span>构建<span class="jill"></span>Java<span class="jill"></span>库</span></h1><h2 class="wolai-block"><span class="inline-wrap">初始化项目</span></h2><code-block class="wolai-block"><div class="wolai-pre"><div data-lang="PowerShell" class="marker"></div><pre>mkdir java<span class="token operator">-</span>lib &amp;&amp; cd <span class="token string">"<span class="token variable">$_</span>"</span>
+gradle init 
+tree <span class="token comment"># 查看项目目录</span>
+<span class="token function">cat</span> settings<span class="token punctuation">.</span>gradle
+<span class="token function">cat</span> build<span class="token punctuation">.</span>gradle
+<span class="token punctuation">.</span><span class="token operator">/</span>gradlew build</pre></div></code-block><h2 class="wolai-block"><span class="inline-wrap">修改<span class="jill"></span>META-INF/MANIFEST.MF</span></h2><div class="wolai-block wolai-text"><div><span class="inline-wrap">官方文档说第一次打包就可以生成可执行的<span class="jill"></span>jar<span class="jill"></span>文件，但是不知道为什么我的不行，所以添加了额外的配置</span></div></div><code-block class="wolai-block"><div class="wolai-pre"><div data-lang="Groovy" class="marker"></div><pre><span class="token comment">// 记得先给Libray类添加main方法</span>
+jar <span class="token punctuation">{</span>
+    manifest <span class="token punctuation">{</span>
+        <span class="token function">attributes</span><span class="token punctuation">(</span><span class="token string">'Implementation-Title'</span><span class="token punctuation">:</span> <span class="token string">'java-lib'</span><span class="token punctuation">,</span>
+                   <span class="token string">'Implementation-Version'</span><span class="token punctuation">:</span> <span class="token string">'0.1.0'</span><span class="token punctuation">,</span>
+                   <span class="token string">'Main-Class'</span><span class="token punctuation">:</span> <span class="token string">'com.hdr.lib.Library'</span>
+                  <span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></pre></div></code-block><h2 class="wolai-block"><span class="inline-wrap">重新打包执行</span></h2><code-block class="wolai-block"><div class="wolai-pre"><div data-lang="PowerShell" class="marker"></div><pre><span class="token punctuation">.</span><span class="token operator">/</span>gradlew build
+java <span class="token operator">-</span>jar java <span class="token operator">-</span>jar build<span class="token operator">/</span>libs<span class="token operator">/</span>java<span class="token operator">-</span>lib<span class="token punctuation">.</span>jar</pre></div></code-block><h1 class="wolai-block"><span class="inline-wrap">构建<span class="jill"></span>JavaWeb<span class="jill"></span>项目</span></h1><h2 class="wolai-block"><span class="inline-wrap">构建目录</span></h2><code-block class="wolai-block"><div class="wolai-pre"><div data-lang="PowerShell" class="marker"></div><pre>mkdir java<span class="token operator">-</span>web &amp;&amp; cd <span class="token string">"<span class="token variable">$_</span>"</span>
+gradle init <span class="token comment">#选择普通Java项目</span>
+mkdir <span class="token operator">-</span>p src<span class="token operator">/</span>main<span class="token operator">/</span>webapp</pre></div></code-block><h2 class="wolai-block"><span class="inline-wrap">修改配置</span></h2><code-block class="wolai-block"><div class="wolai-pre"><div data-lang="Groovy" class="marker"></div><pre>plugins <span class="token punctuation">{</span>
+    <span class="token comment">// Apply the java plugin to add support for Java</span>
+    id <span class="token string">'java'</span>
+
+    <span class="token comment">// Apply the application plugin to add support for building an application</span>
+    id <span class="token string">'application'</span>
+  
+  <span class="token comment">// 添加war插件</span>
+    id <span class="token string">'war'</span>
+    <span class="token comment">// 容器类插件</span>
+    id <span class="token string">'org.gretty'</span> version <span class="token string">'2.2.0'</span> 
+<span class="token punctuation">}</span>
+<span class="token comment">// ...... 省略一些配置</span>
+dependencies <span class="token punctuation">{</span>
+    <span class="token comment">// This dependency is found on compile classpath of this component and consumers.</span>
+    implementation <span class="token string">'com.google.guava:guava:27.0.1-jre'</span>
+
+    <span class="token comment">// Use JUnit test framework</span>
+    testImplementation <span class="token string">'junit:junit:4.12'</span>
+
+    providedCompile <span class="token string">'javax.servlet:javax.servlet-api:3.1.0'</span>
+<span class="token punctuation">}</span>
+</pre></div></code-block><h2 class="wolai-block"><span class="inline-wrap">编写<span class="jill"></span>Servlet</span></h2><code-block class="wolai-block"><div class="wolai-pre"><div data-lang="Java" class="marker"></div><pre><span class="token keyword">package</span> <span class="token namespace">com<span class="token punctuation">.</span>hdr<span class="token punctuation">.</span>web</span>
+
+<span class="token keyword">import</span> <span class="token namespace">java<span class="token punctuation">.</span>io<span class="token punctuation">.</span></span><span class="token class-name">IOException</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">javax<span class="token punctuation">.</span>servlet<span class="token punctuation">.</span></span><span class="token class-name">ServletException</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">javax<span class="token punctuation">.</span>servlet<span class="token punctuation">.</span>annotation<span class="token punctuation">.</span></span><span class="token class-name">WebServlet</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">javax<span class="token punctuation">.</span>servlet<span class="token punctuation">.</span>http<span class="token punctuation">.</span></span><span class="token class-name">HttpServlet</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">javax<span class="token punctuation">.</span>servlet<span class="token punctuation">.</span>http<span class="token punctuation">.</span></span><span class="token class-name">HttpServletRequest</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">javax<span class="token punctuation">.</span>servlet<span class="token punctuation">.</span>http<span class="token punctuation">.</span></span><span class="token class-name">HttpServletResponse</span><span class="token punctuation">;</span>
+
+<span class="token annotation punctuation">@WebServlet</span><span class="token punctuation">(</span>name <span class="token operator">=</span> <span class="token string">"HelloServlet"</span><span class="token punctuation">,</span> urlPatterns <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token string">"hello"</span><span class="token punctuation">}</span><span class="token punctuation">,</span> loadOnStartup <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">)</span> 
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">HelloServlet</span> <span class="token keyword">extends</span> <span class="token class-name">HttpServlet</span> <span class="token punctuation">{</span>
+    <span class="token keyword">protected</span> <span class="token keyword">void</span> <span class="token function">doGet</span><span class="token punctuation">(</span><span class="token class-name">HttpServletRequest</span> request<span class="token punctuation">,</span> <span class="token class-name">HttpServletResponse</span> response<span class="token punctuation">)</span>
+        <span class="token keyword">throws</span> <span class="token class-name">ServletException</span><span class="token punctuation">,</span> <span class="token class-name">IOException</span> <span class="token punctuation">{</span>
+        response<span class="token punctuation">.</span><span class="token function">getWriter</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">print</span><span class="token punctuation">(</span><span class="token string">"Hello, World!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">protected</span> <span class="token keyword">void</span> <span class="token function">doPost</span><span class="token punctuation">(</span><span class="token class-name">HttpServletRequest</span> request<span class="token punctuation">,</span> <span class="token class-name">HttpServletResponse</span> response<span class="token punctuation">)</span>
+        <span class="token keyword">throws</span> <span class="token class-name">ServletException</span><span class="token punctuation">,</span> <span class="token class-name">IOException</span> <span class="token punctuation">{</span>
+        <span class="token class-name">String</span> name <span class="token operator">=</span> request<span class="token punctuation">.</span><span class="token function">getParameter</span><span class="token punctuation">(</span><span class="token string">"name"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>name <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> name <span class="token operator">=</span> <span class="token string">"World"</span><span class="token punctuation">;</span>
+        request<span class="token punctuation">.</span><span class="token function">setAttribute</span><span class="token punctuation">(</span><span class="token string">"user"</span><span class="token punctuation">,</span> name<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        request<span class="token punctuation">.</span><span class="token function">getRequestDispatcher</span><span class="token punctuation">(</span><span class="token string">"response.jsp"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">forward</span><span class="token punctuation">(</span>request<span class="token punctuation">,</span> response<span class="token punctuation">)</span><span class="token punctuation">;</span> 
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></pre></div></code-block><code-block class="wolai-block"><div class="wolai-pre"><div data-lang="Html" class="marker"></div><pre><span class="token comment">&lt;!-- src/main/webapp/index.html --></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>html</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>head</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>title</span><span class="token punctuation">></span></span>Web Demo<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>title</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>head</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">></span></span>Say <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>hello<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Hello<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span> 
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>form</span> <span class="token attr-name">method</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>post<span class="token punctuation">"</span></span> <span class="token attr-name">action</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>hello<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>  
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h2</span><span class="token punctuation">></span></span>Name:<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h2</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>text<span class="token punctuation">"</span></span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>say-hello-text-input<span class="token punctuation">"</span></span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>name<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>submit<span class="token punctuation">"</span></span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>say-hello-button<span class="token punctuation">"</span></span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>Say Hello<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>form</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">></span></span></pre></div></code-block><code-block class="wolai-block"><div class="wolai-pre"><div data-lang="Html" class="marker"></div><pre><span class="token comment">&lt;!-- src/main/webapp/response.jsp --></span>
+&lt;%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>html</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>head</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>title</span><span class="token punctuation">></span></span>Hello Page<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>title</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>head</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h2</span><span class="token punctuation">></span></span>Hello, ${user}!<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h2</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">></span></span></pre></div></code-block><code-block class="wolai-block"><div class="wolai-pre"><div data-lang="PowerShell" class="marker"></div><pre><span class="token comment"># 运行项目</span>
+<span class="token punctuation">.</span><span class="token operator">/</span>gradlew appRun</pre></div></code-block></article><footer></footer></body></html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="zh-Hans-CN"><head><meta charset="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=Edge"/><link rel="stylesheet" type="text/css" href="../css/modern-norm.min.css"/><link rel="stylesheet" type="text/css" href="../css/prism.min.css"/><link rel="stylesheet" type="text/css" href="../css/katex.min.css"/><link rel="stylesheet" type="text/css" href="../css/wolai.css"/><title>开发规范 - wolai 笔记</title><link rel="shortcut icon"></link></head><body><header><div class="image"></div><div class="title"><div class="banner"><div class="icon"></div></div><div data-title="开发规范" class="main-title"></div></div></header><article><div class="wolai-bookmark wolai-block"><a href="https://github.com/aalansehaiyang/technology-talk/blob/master/system-architecture/%E7%BC%96%E7%A0%81%E5%89%8D3000%E9%97%AE.md">technology-talk/编码前3000问.md at master · aalansehaiyang/technology-talk</a><div class="info-box"><div class="text-pane"><div data-title="technology-talk/编码前3000问.md at master · aalansehaiyang/technology-talk"></div><div data-desc="汇总java生态圈常用技术框架、开源中间件，系统架构、数据库、大公司架构案例、常用三方类库、项目管理、线上问题排查、个人成长、思考等知识 - technology-talk/编码前3000问.md at master · aalansehaiyang/technology-talk"></div><div class="icon-host"><div class="icon icon-image" style="background-image: url(&quot;https://github.com/fluidicon.png&quot;)"></div><div data-hostname="github.com"></div></div></div><div class="preview-pane" style="background-image: url(https://opengraph.githubassets.com/bc816006fda04857d4333057670e0a0b87336c2b95e79d2db728dcb1a322aa72/aalansehaiyang/technology-talk)"></div></div></div><div class="wolai-block wolai-text"><div><span class="inline-wrap"></span><br/></div></div><details class="wolai-block"><summary><div class="marker placeholder"></div><span class="inline-wrap">我个人的开发规范</span></summary></details><details class="wolai-block"><summary><div class="marker placeholder"></div><span class="inline-wrap">我的命名规范</span></summary></details><details class="wolai-block"><summary><div class="marker placeholder"></div><span class="inline-wrap">我的署名规范</span></summary></details><h2 class="wolai-block"><span class="inline-wrap">代码规范</span></h2><code-block class="wolai-block"><div class="wolai-pre"><div data-lang="Java" class="marker"></div><pre><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">OrderBo</span><span class="token punctuation">{</span>
+
+<span class="token comment">// --------------- 公共方法 ---------------</span>
+
+<span class="token comment">//        按照查增删改的顺序编写公共方法</span>
+
+<span class="token comment">// --------------- 业务方法 ---------------</span>
+
+<span class="token comment">// ---------- 创建订单 ----------</span>
+
+<span class="token comment">// ---------- 查看订单 ----------</span>
+
+<span class="token punctuation">}</span></pre></div></code-block><ul class="wolai-block"><li><div class="marker"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 14.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5z"></path></svg></div><span class="inline-wrap">实例方法内如果要使用自身的实例变量和实例方法，需要带上</span><span class="inline-wrap"><code>this</code></span><span class="inline-wrap">关键字</span></li></ul><h2 class="wolai-block"><span class="inline-wrap">命名规范</span></h2><ul class="wolai-block"><li><div class="marker"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 14.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5z"></path></svg></div><span class="inline-wrap">包命名规范</span><ul class="wolai-block"><li><div class="marker"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 14.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5z"></path></svg></div><span class="inline-wrap"></span><br/></li></ul></li><li><div class="marker"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 14.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5z"></path></svg></div><span class="inline-wrap">项目名规范</span><ul class="wolai-block"><li><div class="marker"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 14.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5z"></path></svg></div><span class="inline-wrap">英文：单词小写，单词之间用-分割，例如<span class="jill"></span>spring-boot</span></li><li><div class="marker"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 14.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5z"></path></svg></div><span class="inline-wrap">拼音：驼峰命名法</span></li></ul></li><li><div class="marker"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 14.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5z"></path></svg></div><span class="inline-wrap">目录名规范</span><ul class="wolai-block"><li><div class="marker"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 14.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5z"></path></svg></div><span class="inline-wrap">英文：单词小写，单词之间用-分割，例如<span class="jill"></span>spring-boot</span></li><li><div class="marker"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 14.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5z"></path></svg></div><span class="inline-wrap">拼音：驼峰命名法</span></li></ul></li></ul><div class="wolai-block wolai-text"><div><span class="inline-wrap"></span><br/></div></div><h2 class="wolai-block"><span class="inline-wrap">单元测试</span><div class="wolai-sub-page wolai-block"><div data-symbol="💯" class="page-icon"></div><a href="%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95.html"><span>单元测试</span></a></div></h2><div class="wolai-block wolai-text"><div><span class="inline-wrap"></span><br/></div></div><div class="wolai-block wolai-text"><div><span class="inline-wrap"></span><br/></div></div><h2 class="wolai-block"><span class="inline-wrap">Git<span class="jill"></span>使用规范</span></h2><details class="wolai-block"><summary><div class="marker placeholder"></div><span class="inline-wrap"><b>git flow</b></span><span class="inline-wrap">：这个要看公司要求，不过你要了解常见的</span><span class="inline-wrap"><code>git flow</code></span><span class="inline-wrap">流程以及它们之间的区别。</span></summary></details><details class="wolai-block"><summary><div class="marker"></div><span class="inline-wrap"><b>merge 和 rebase</b></span><span class="inline-wrap">：下游接受上游的变更使用</span><span class="inline-wrap"><code>rebase</code></span><span class="inline-wrap">，下游推送变更到上游使用</span><span class="inline-wrap"><code>merge</code></span><span class="inline-wrap">。</span></summary><hr class="wolai-block"/><div class="wolai-block wolai-text"><div><span class="inline-wrap">从</span><span class="inline-wrap"><code>master</code></span><span class="inline-wrap">分支创建 </span><span class="inline-wrap"><code>feature1</code></span><span class="inline-wrap">分支，在开发</span><span class="inline-wrap"><code>feature1</code></span><span class="inline-wrap">分支时，有人把</span><span class="inline-wrap"><code>feature2</code></span><span class="inline-wrap">分支合并到</span><span class="inline-wrap"><code>master</code></span><span class="inline-wrap">分支了，这时候你就要用</span><span class="inline-wrap"><code>rebase</code></span><span class="inline-wrap">。</span></div></div><code-block class="wolai-block"><div class="wolai-pre"><div data-lang="Git" class="marker"></div><pre><span class="token command">$ git switch feature1</span>
+<span class="token command">$ git rebase master</span>
+fix conflicts...
+<span class="token command">$ git rebase<span class="token parameter"> --continue</span></span></pre></div></code-block><div class="wolai-block wolai-text"><div><span class="inline-wrap">在开发本地</span><span class="inline-wrap"><code>feature1</code></span><span class="inline-wrap">分支时，你同事提交了他的代码到远程的</span><span class="inline-wrap"><code>feature1</code></span><span class="inline-wrap">分支，这时候你也要用</span><span class="inline-wrap"><code>rebase</code></span><span class="inline-wrap">。</span></div></div><div class="wolai-block wolai-text"><div><span class="inline-wrap"><code>master</code></span><span class="inline-wrap">分支和远程的</span><span class="inline-wrap"><code>feature1</code></span><span class="inline-wrap">分支都是你本地</span><span class="inline-wrap"><code>feature1</code></span><span class="inline-wrap">分支的上游。</span></div></div><hr class="wolai-block"/><div class="wolai-block wolai-text"><div><span class="inline-wrap">把</span><span class="inline-wrap"><code>feature1</code></span><span class="inline-wrap">分支合并到</span><span class="inline-wrap"><code>master</code></span><span class="inline-wrap">分支时，使用</span><span class="inline-wrap"><code>merge</code></span><span class="inline-wrap">。</span></div></div><code-block class="wolai-block"><div class="wolai-pre"><div data-lang="Git" class="marker"></div><pre><span class="token command">$ git switch master</span>
+<span class="token command">$ git merge<span class="token parameter"> --no</span>-ff<span class="token parameter"> -m</span> </span><span class="token string">"Merge branch 'feature-1'"</span> feature1</pre></div></code-block><div class="wolai-block wolai-text"><div><span class="inline-wrap">那本地</span><span class="inline-wrap"><code>feature1</code></span><span class="inline-wrap">分支推远程</span><span class="inline-wrap"><code>feature1</code></span><span class="inline-wrap">分支用什么？本地推远程没有</span><span class="inline-wrap"><code>merge</code></span><span class="inline-wrap">也没有</span><span class="inline-wrap"><code>rebase</code></span><span class="inline-wrap">的说法，只是</span><span class="inline-wrap"><code>push</code></span><span class="inline-wrap">而已。</span></div></div><hr class="wolai-block"/><div class="wolai-block wolai-text"><div><span class="inline-wrap">一个好的提交历史，应该是这样的：</span></div></div><code-block class="wolai-block"><div class="wolai-pre"><div data-lang="Git" class="marker"></div><pre>*   e2e6451 (HEAD -> master) feture-c finished
+|\
+| * 516fc18 C.2
+| * 09112f5 C.1
+|/
+*   c6667ab feture-a finished
+|\
+| * e64c4b6 A.2
+| * 6058323 A.1
+|/
+*   2b24281 feture-b finished
+|\
+| * c354401 B.4
+| * 4bfefb8 B.3
+| * eb13f72 B.2
+| * c2c62b9 B.1
+|/
+* bbbba82 init
+</pre></div></code-block><div class="wolai-block wolai-text"><div><span class="inline-wrap">而不是这样的：</span></div></div><code-block class="wolai-block"><div class="wolai-pre"><div data-lang="Git" class="marker"></div><pre>*   9f0c13b (HEAD -> master) feture-c finished
+|\
+| * 55be61c C.2
+| *   e18b5c5 merge master
+| |\
+| |/
+|/|
+* |   ee549c2 feture-a finished
+|\ \
+| * | 51f2126 A.3
+| * |   72118e2 merge master
+| |\ \
+| |/ /
+|/| |
+* | |   6cb16a0 feture-b finished
+|\ \ \
+| * | | 7b27b77 B.3
+| * | | 3aac8a2 B.2
+| * | | 2259a21 B.1
+|/ / /
+| * | 785fab7 A.2
+| * | 2b2b664 A.1
+|/ /
+| * bf9e77f C.1
+|/
+* 188abf9 init</pre></div></code-block><div class="wolai-block wolai-text"><div><span class="inline-wrap">也不是这样的：</span></div></div><code-block class="wolai-block"><div class="wolai-pre"><div data-lang="Git" class="marker"></div><pre>* b8902ed (HEAD -> master) C.2
+* a4d4e33 C.1
+* 7e63b80 A.3
+* 760224c A.2
+* 84b2500 A.1
+* cb4c4cb B.3
+* 2ea8f0d B.2
+* df97f39 B.1
+* 838f514 init</pre></div></code-block></details><div class="wolai-block wolai-text"><div><span class="inline-wrap"></span><br/></div></div><h2 class="wolai-block"><span class="inline-wrap">开发工具</span></h2><div class="wolai-block wolai-text"><div><span class="inline-wrap">utools</span></div></div></article><footer></footer></body></html>

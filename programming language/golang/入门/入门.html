@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="zh-Hans-CN"><head><meta charset="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=Edge"/><link rel="stylesheet" type="text/css" href="../../../css/modern-norm.min.css"/><link rel="stylesheet" type="text/css" href="../../../css/prism.min.css"/><link rel="stylesheet" type="text/css" href="../../../css/katex.min.css"/><link rel="stylesheet" type="text/css" href="../../../css/wolai.css"/><title>入门 - wolai 笔记</title><link rel="shortcut icon" href="data:image/svg+xml,%3Csvg xmlns=&apos;http://www.w3.org/2000/svg&apos; viewBox=&apos;0 0 800 800&apos;%3E%3Cdefs%3E%3Cstyle%3E.cls-1%7Bfill:%23fff;%7D%3C/style%3E%3C/defs%3E%3Cg%3E%3Cpath class=&apos;cls-1&apos; d=&apos;M610.08,0c66,0,90,6.88,114.13,19.79a134.62,134.62,0,0,1,56,56l2.28,4.4C793.93,103,800,127.88,800,189.92V610.08l-.08,11.56c-.78,57.38-7.58,79.89-19.71,102.57a134.62,134.62,0,0,1-56,56l-4.4,2.28C697,793.93,672.12,800,610.08,800H189.92l-11.56-.08c-57.38-.78-79.89-7.58-102.57-19.71a134.62,134.62,0,0,1-56-56l-2.28-4.4C6.44,697.75.4,673.72,0,616L0,189.92c0-66,6.88-90,19.79-114.13a134.62,134.62,0,0,1,56-56l4.4-2.28C102.25,6.44,126.28.4,184,0Z&apos;/%3E%3Cpath d=&apos;M610.08,0c66,0,90,6.88,114.13,19.79a134.62,134.62,0,0,1,56,56l2.28,4.4C793.93,103,800,127.88,800,189.92V610.08l-.08,11.56c-.78,57.38-7.58,79.89-19.71,102.57a134.62,134.62,0,0,1-56,56l-4.4,2.28C697,793.93,672.12,800,610.08,800H189.92l-11.56-.08c-57.38-.78-79.89-7.58-102.57-19.71a134.62,134.62,0,0,1-56-56l-2.28-4.4C6.44,697.75.4,673.72,0,616L0,189.92c0-66,6.88-90,19.79-114.13a134.62,134.62,0,0,1,56-56l4.4-2.28C102.25,6.44,126.28.4,184,0Zm4.72,88.9H185.2L172.42,89c-32.78.62-43.68,3.24-54.71,9.14a45.84,45.84,0,0,0-19.54,19.54c-6.61,12.36-9.11,24.55-9.27,67.49V614.8L89,627.58c.62,32.78,3.24,43.68,9.14,54.71a45.84,45.84,0,0,0,19.54,19.54c12.36,6.61,24.55,9.11,67.49,9.27H610.08c46.79,0,59.41-2.44,72.21-9.28a45.84,45.84,0,0,0,19.54-19.54c6.61-12.36,9.11-24.55,9.27-67.49V189.92c0-46.79-2.44-59.41-9.28-72.21a45.84,45.84,0,0,0-19.54-19.54C669.93,91.56,657.74,89.06,614.8,88.9ZM233.33,493.33A73.34,73.34,0,1,1,160,566.67,73.35,73.35,0,0,1,233.33,493.33Z&apos;/%3E%3C/g%3E%3C/svg%3E"></link></head><body class="font-serif"><header><div class="image"></div><div class="title"><div class="banner"><div class="icon"></div></div><div data-title="入门" class="main-title"></div></div></header><article><code-block class="wolai-block"><div class="wolai-pre"><div data-lang="纯文本" class="marker"></div><pre># <span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span>
+<span class="token maybe-class-name">HelloWorld</span>
+变量声明
+函数声明
+流程控制
+字符串、数组、列表、符号表
+<span class="token function">代码引用、命名空间</span><span class="token punctuation">(</span>如何解决重名问题<span class="token punctuation">)</span>
+<span class="token function">类型系统</span><span class="token punctuation">(</span>基本数据类型、数据类型新增和使用<span class="token punctuation">)</span>
+面向对象
+泛型
+异常处理、错误处理
+依赖管理
+函数式编程
+指针、宏
+# <span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span> 高级特性 <span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span>
+# <span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span> 语言实现原理 <span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span></pre></div></code-block><h2 class="wolai-block"><span class="inline-wrap">环境设置</span></h2><code-block class="wolai-block"><div class="wolai-pre"><div data-lang="PowerShell" class="marker"></div><pre><span class="token comment"># 1.安装golang</span>
+brew install go
+<span class="token comment"># 2.创建目录结构</span>
+mkdir <span class="token variable">$HOME</span><span class="token operator">/</span>go \
+&amp;&amp; mkdir <span class="token variable">$HOME</span><span class="token operator">/</span>go<span class="token operator">/</span>bin \
+&amp;&amp; mkdir <span class="token variable">$HOME</span><span class="token operator">/</span>go<span class="token operator">/</span>pkg \
+&amp;&amp; mkdir <span class="token variable">$HOME</span><span class="token operator">/</span>go<span class="token operator">/</span>src
+<span class="token comment"># 3.设置环境变量</span>
+<span class="token function">echo</span> <span class="token string">"export GOPATH=<span class="token variable">$HOME</span>/go"</span> >> ~<span class="token operator">/</span><span class="token punctuation">.</span>zshrc
+<span class="token comment"># 疑问</span>
+<span class="token comment"># 第二第三步的意义是啥？</span></pre></div></code-block><h2 class="wolai-block"><span class="inline-wrap">HelloWorld</span></h2><ol class="wolai-block"><li><div class="marker"></div><span class="inline-wrap">创建文件</span><span class="inline-wrap"><code>hello.go</code></span></li><li><div class="marker"></div><span class="inline-wrap">编写以下内容</span><code-block class="wolai-block"><div class="wolai-pre"><div data-lang="Go" class="marker"></div><pre><span class="token keyword">package</span> main
+
+<span class="token keyword">import</span> <span class="token punctuation">(</span>
+  <span class="token string">"fmt"</span>
+<span class="token punctuation">)</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+  fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"hello world"</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span></pre></div></code-block></li><li><div class="marker"></div><span class="inline-wrap">编译：</span><span class="inline-wrap"><code>go build</code></span><span class="inline-wrap"> 得到可执行二进制文件</span><span class="inline-wrap"><code>main</code></span></li><li><div class="marker"></div><span class="inline-wrap">编译并且运行：</span><span class="inline-wrap"><code>go run main.go</code></span></li></ol><h2 class="wolai-block"><span class="inline-wrap">声明变量</span></h2><code-block class="wolai-block"><div class="wolai-pre"><div data-lang="Go" class="marker"></div><pre><span class="token keyword">var</span> name <span class="token builtin">string</span> <span class="token operator">=</span> <span class="token string">"hyc"</span>
+<span class="token keyword">var</span> age<span class="token punctuation">,</span>heigh <span class="token builtin">int</span> <span class="token operator">=</span> <span class="token number">24</span><span class="token punctuation">,</span><span class="token number">167</span>
+<span class="token comment">// 类型推断</span>
+<span class="token keyword">var</span> str <span class="token operator">=</span> <span class="token string">"this is a string"</span>
+str <span class="token operator">:=</span> <span class="token string">"this is a string"</span> <span class="token comment">// 也叫简短变量声明，只能在函数中使用</span>
+<span class="token comment">// 上面等同于 </span>
+<span class="token keyword">var</span> str <span class="token builtin">string</span> <span class="token operator">=</span> <span class="token string">"this is a string"</span>
+<span class="token comment">// 声明常量</span>
+<span class="token keyword">const</span> name <span class="token builtin">string</span> <span class="token operator">=</span> <span class="token string">"hyc"</span> <span class="token comment">// 无需var,而且也不能用:=</span></pre></div></code-block><h2 class="wolai-block"><span class="inline-wrap">声明函数</span></h2><code-block class="wolai-block"><div class="wolai-pre"><div data-lang="Go" class="marker"></div><pre><span class="token comment">// 函数声明标识符 函数名(参数) (返回值){}</span>
+<span class="token comment">// 函数可以无参数，可以无返回值，可以有多个返回值</span>
+<span class="token keyword">func</span> <span class="token function">SayHi</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token punctuation">}</span>
+<span class="token keyword">func</span> <span class="token function">Print</span><span class="token punctuation">(</span>x <span class="token builtin">int</span><span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token punctuation">}</span>
+<span class="token keyword">func</span> <span class="token function">Add</span><span class="token punctuation">(</span>x <span class="token builtin">int</span> <span class="token punctuation">,</span> y <span class="token builtin">int</span><span class="token punctuation">)</span> <span class="token builtin">int</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+<span class="token keyword">func</span> <span class="token function">Incr</span><span class="token punctuation">(</span>x <span class="token builtin">int</span> <span class="token punctuation">,</span> y <span class="token builtin">int</span> <span class="token punctuation">)</span> <span class="token punctuation">(</span><span class="token builtin">int</span> <span class="token punctuation">,</span><span class="token builtin">int</span><span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token punctuation">}</span>
+<span class="token comment">// 不定参数</span>
+<span class="token keyword">func</span> <span class="token function">Sum</span><span class="token punctuation">(</span>numbers <span class="token operator">...</span> <span class="token builtin">int</span><span class="token punctuation">)</span> <span class="token builtin">int</span> <span class="token punctuation">{</span> 
+  total <span class="token operator">:=</span> <span class="token number">0</span>
+  <span class="token keyword">for</span> <span class="token boolean">_</span><span class="token punctuation">,</span>num <span class="token operator">:=</span> <span class="token keyword">range</span> numbers<span class="token punctuation">{</span>
+    total <span class="token operator">+=</span> num
+  <span class="token punctuation">}</span>
+  <span class="token keyword">return</span> num
+<span class="token punctuation">}</span> 
+<span class="token comment">// 具有名字的返回值</span>
+<span class="token keyword">func</span> <span class="token function">sum</span><span class="token punctuation">(</span>x <span class="token builtin">int</span> <span class="token punctuation">,</span> y <span class="token builtin">int</span><span class="token punctuation">)</span> <span class="token punctuation">(</span>z <span class="token builtin">int</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+  z <span class="token operator">=</span> x<span class="token operator">+</span>y
+  <span class="token keyword">return</span>
+<span class="token punctuation">}</span></pre></div></code-block><h2 class="wolai-block"><span class="inline-wrap">流程控制</span></h2><code-block class="wolai-block"><div class="wolai-pre"><div data-lang="Go" class="marker"></div><pre><span class="token keyword">if</span> name <span class="token operator">==</span> <span class="token string">"hyc"</span><span class="token punctuation">{</span>
+  <span class="token comment">// todo </span>
+<span class="token punctuation">}</span><span class="token keyword">else</span> <span class="token keyword">if</span> name <span class="token operator">==</span> <span class="token string">"zjf"</span><span class="token punctuation">{</span>
+  
+<span class="token punctuation">}</span><span class="token keyword">else</span><span class="token punctuation">{</span>
+  
+<span class="token punctuation">}</span>
+
+<span class="token keyword">switch</span> name <span class="token punctuation">{</span>
+  <span class="token keyword">case</span> <span class="token string">"hyc"</span><span class="token punctuation">:</span>
+    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"name"</span><span class="token punctuation">,</span>name<span class="token punctuation">)</span>
+  <span class="token keyword">case</span> <span class="token string">"zjf"</span><span class="token punctuation">:</span><span class="token punctuation">{</span>
+    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"name"</span><span class="token punctuation">,</span>name<span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>  
+  <span class="token keyword">default</span><span class="token punctuation">:</span>
+    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"name"</span><span class="token punctuation">,</span>name<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">for</span> i<span class="token operator">:=</span><span class="token number">0</span><span class="token punctuation">;</span> i<span class="token operator">&lt;</span><span class="token number">10</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">{</span>
+  fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+i<span class="token operator">:=</span><span class="token number">0</span>
+<span class="token keyword">for</span> i<span class="token operator">&lt;</span><span class="token number">10</span><span class="token punctuation">{</span>
+  i<span class="token operator">++</span>
+  fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// go里面没有while</span>
+
+<span class="token comment">// defer关键字后面的语句，会在函数执行完毕后执行</span>
+<span class="token keyword">func</span> <span class="token function">fn</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+  <span class="token keyword">defer</span> fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"Run after func finish"</span><span class="token punctuation">)</span>
+  fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"func finish"</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span></pre></div></code-block><h2 class="wolai-block"><span class="inline-wrap">字符串、数组、列表、符号表</span></h2><div class="wolai-block wolai-text"><div><span class="inline-wrap"></span><br/></div></div><h2 class="wolai-block"><span class="inline-wrap">代码引用</span></h2><div class="wolai-block wolai-text"><div><span class="inline-wrap">Go<span class="jill"></span>程序所有代码都必须归属于某一个包下，Go<span class="jill"></span>程序以<span class="jill"></span>package<span class="jill"></span>语句打头。</span></div></div><div class="wolai-block wolai-text"><div><span class="inline-wrap">main<span class="jill"></span>包是一种特殊的包，其特殊之处在于不能被导入。对<span class="jill"></span>main<span class="jill"></span>包的唯一要求是，必须声明一个<span class="jill"></span>main<span class="jill"></span>函数，这个函数不接受任何参数且不返回任何值。简而言之，main<span class="jill"></span>包是程序的入口。</span></div></div><aside class="bg-cultured wolai-block"><div data-symbol="❄️" class="icon"></div><span class="inline-wrap">跟<span class="jill"></span>Java<span class="jill"></span>不同，Java<span class="jill"></span>的代码引用是到文件名级别的，而<span class="jill"></span>Go<span class="jill"></span>是包名级别的，直接就是包名.函数/结构</span></aside><aside class="bg-cultured wolai-block"><div data-symbol="❄️" class="icon"></div><span class="inline-wrap">go<span class="jill"></span>的封装是通过名称大小写实现的。如果定义的常量、变量、类型、接口、结构、函数等的名称是大写字母开头，这表示它们能被</span><span class="inline-wrap"><b>其它包</b></span><span class="inline-wrap">访问或调用（相当于 </span><span class="inline-wrap"><code>public</code></span><span class="inline-wrap">）；非大写开头就只能在</span><span class="inline-wrap"><b>包内使用</b></span><span class="inline-wrap">（相当于 </span><span class="inline-wrap"><code>private</code></span><span class="inline-wrap">）。</span></aside><div class="wolai-block wolai-text"><div><span class="inline-wrap"></span><br/></div></div><div class="wolai-block wolai-text"><div><span class="inline-wrap"></span><br/></div></div><h2 class="wolai-block"><span class="inline-wrap">类型系统</span></h2><h3 class="wolai-block"><span class="inline-wrap">基本类型</span></h3><code-block class="wolai-block"><div class="wolai-pre"><div data-lang="Go" class="marker"></div><pre><span class="token comment">// 布尔类型 默认值false</span>
+<span class="token keyword">var</span> b <span class="token builtin">bool</span> <span class="token operator">=</span> <span class="token boolean">true</span> 
+<span class="token comment">// 整数</span>
+
+<span class="token comment">// 浮点数</span>
+
+<span class="token comment">// ------------------------ 字符串 ------------------------</span>
+<span class="token keyword">var</span> name <span class="token builtin">string</span> <span class="token operator">=</span> <span class="token string">"hyc"</span>
+
+<span class="token comment">// ------------------------ 数组 ------------------------</span>
+<span class="token keyword">var</span> books <span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token builtin">string</span>
+books<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">"Java In Action"</span>
+numbers <span class="token operator">:=</span> <span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span><span class="token builtin">int</span><span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">}</span> <span class="token comment">// 静态初始化</span>
+<span class="token keyword">for</span> idx<span class="token punctuation">,</span>num <span class="token operator">:=</span> <span class="token keyword">range</span> numbers<span class="token punctuation">{</span> <span class="token comment">// 遍历数组</span>
+  fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"["</span><span class="token punctuation">,</span>idx<span class="token punctuation">,</span><span class="token string">":"</span><span class="token punctuation">,</span>num<span class="token punctuation">,</span><span class="token string">"]"</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// ------------------------ 切片 ------------------------ </span>
+<span class="token comment">//（看清楚了 [2]string 是数组，[]string 是切片）</span>
+names <span class="token operator">:=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">string</span><span class="token punctuation">{</span><span class="token string">"a"</span><span class="token punctuation">,</span><span class="token string">"b"</span><span class="token punctuation">,</span><span class="token string">"c"</span><span class="token punctuation">}</span>
+firstTwoName <span class="token operator">:=</span> names<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">:</span><span class="token number">2</span><span class="token punctuation">]</span> <span class="token comment">// a,b (左开右闭)</span>
+firstTwoName <span class="token operator">:=</span> names<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token number">2</span><span class="token punctuation">]</span>  <span class="token comment">// a,b</span>
+twoThreeName <span class="token operator">:=</span> names<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">:</span><span class="token punctuation">]</span>  <span class="token comment">// b,c</span>
+allNames     <span class="token operator">:=</span> names<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token punctuation">]</span>   <span class="token comment">// a,b,c</span>
+
+<span class="token comment">// 创建一个初始长度为1的切片</span>
+books <span class="token operator">:=</span> <span class="token function">make</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">string</span> <span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span>
+books<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">"Java In Action"</span>
+
+<span class="token comment">// 往切片添加两个元素</span>
+books <span class="token operator">=</span> <span class="token function">append</span><span class="token punctuation">(</span>books<span class="token punctuation">,</span><span class="token string">"Python In Action"</span><span class="token punctuation">,</span><span class="token string">"Go In Action"</span><span class="token punctuation">)</span> 
+<span class="token comment">// 往切片中删除索引为2的元素（这语法也太丑了吧）</span>
+books <span class="token operator">=</span> <span class="token function">append</span><span class="token punctuation">(</span>books<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">,</span>books<span class="token punctuation">[</span><span class="token number">2</span><span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">:</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+
+<span class="token comment">// 复制切片的内容（值拷贝）</span>
+aBooks <span class="token operator">:=</span> <span class="token function">make</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">string</span> <span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span>
+<span class="token function">copy</span><span class="token punctuation">(</span>aBooks<span class="token punctuation">,</span>books<span class="token punctuation">)</span>
+
+<span class="token comment">// ------------------------ 哈希表 ------------------------</span>
+<span class="token comment">// 创建映射</span>
+scores <span class="token operator">:=</span> <span class="token function">make</span><span class="token punctuation">(</span><span class="token keyword">map</span><span class="token punctuation">[</span><span class="token builtin">string</span><span class="token punctuation">]</span><span class="token builtin">int</span><span class="token punctuation">)</span>
+<span class="token comment">// 往映射中添加元素</span>
+scores<span class="token punctuation">[</span><span class="token string">"hyc"</span><span class="token punctuation">]</span><span class="token operator">=</span><span class="token number">99</span>
+scores<span class="token punctuation">[</span><span class="token string">"zjf"</span><span class="token punctuation">]</span><span class="token operator">=</span><span class="token number">100</span>
+<span class="token comment">// 往映射中删除元素</span>
+<span class="token function">delete</span><span class="token punctuation">(</span>scores<span class="token punctuation">,</span><span class="token string">"hyc"</span><span class="token punctuation">)</span>
+
+<span class="token comment">// nil</span>
+
+<span class="token comment">// 函数</span>
+sumFunc <span class="token operator">:=</span> <span class="token keyword">func</span><span class="token punctuation">(</span>numbers<span class="token operator">...</span><span class="token builtin">int</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+  <span class="token comment">// todo</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// 类型检测</span>
+reflect<span class="token punctuation">.</span><span class="token function">TypeOf</span><span class="token punctuation">(</span>books<span class="token punctuation">)</span> # 需要先引入reflect包
+
+<span class="token comment">// 类型转换 T()</span>
+
+</pre></div></code-block><h3 class="wolai-block"><span class="inline-wrap">自定义类型</span></h3><code-block class="wolai-block"><div class="wolai-pre"><div data-lang="Go" class="marker"></div><pre><span class="token comment">// 声明一个结构体，结构体就是一堆数据结构的集合</span>
+<span class="token comment">// 结构体并非创建面向对象代码的方式，而是一种数据结构创建方式，旨在满足数据建模需求</span>
+<span class="token keyword">type</span> movie <span class="token keyword">struct</span><span class="token punctuation">{</span>
+  Name <span class="token builtin">string</span>
+  Rating <span class="token builtin">float32</span>
+<span class="token punctuation">}</span>
+<span class="token comment">// 使用结构体</span>
+m <span class="token operator">:=</span> <span class="token function">new</span><span class="token punctuation">(</span>Movie<span class="token punctuation">)</span>
+m<span class="token punctuation">.</span>Name<span class="token operator">=</span><span class="token string">"King Kong"</span>
+m<span class="token punctuation">.</span>Rating<span class="token operator">=</span><span class="token string">"9.3"</span>
+
+m <span class="token operator">:=</span> movie<span class="token punctuation">{</span>
+  Name<span class="token punctuation">:</span><span class="token string">"King Kong"</span><span class="token punctuation">,</span>
+  Rating<span class="token punctuation">:</span><span class="token string">"9.3"</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">var</span> m movie<span class="token punctuation">;</span>
+
+<span class="token comment">// 嵌套结构体</span>
+<span class="token keyword">type</span> person <span class="token keyword">struct</span><span class="token punctuation">{</span>
+  Name <span class="token builtin">string</span>
+  Age <span class="token builtin">int</span>
+  Address address
+<span class="token punctuation">}</span>
+
+<span class="token keyword">type</span> address <span class="token keyword">struct</span><span class="token punctuation">{</span>
+  city <span class="token builtin">string</span>
+  detail <span class="token builtin">string</span>
+<span class="token punctuation">}</span>
+
+p <span class="token operator">:=</span> person<span class="token punctuation">{</span>
+  Name<span class="token punctuation">:</span><span class="token string">"hyc"</span><span class="token punctuation">,</span>
+  Age<span class="token punctuation">:</span><span class="token number">24</span>
+  Address<span class="token punctuation">:</span>address<span class="token punctuation">{</span>
+    city<span class="token punctuation">:</span><span class="token string">"深圳"</span><span class="token punctuation">,</span>
+    detail<span class="token punctuation">:</span><span class="token string">"天天中双色球街"</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></pre></div></code-block><h2 class="wolai-block"><span class="inline-wrap">面向对象</span></h2><div class="wolai-block wolai-text"><div><span class="inline-wrap"><b>封装</b></span></div></div><div class="wolai-block wolai-text"><div><span class="inline-wrap">GO<span class="jill"></span>通过名称的大小写实现封装，如果定义的常量、变量、类型、接口、结构、函数等的名称是大写字母开头，这表示它们能被</span><span class="inline-wrap"><b>其它包</b></span><span class="inline-wrap">访问或调用（相当于 </span><span class="inline-wrap"><code>public</code></span><span class="inline-wrap">）；非大写开头就只能在</span><span class="inline-wrap"><b>包内使用</b></span><span class="inline-wrap">（相当于 </span><span class="inline-wrap"><code>private</code></span><span class="inline-wrap">）。</span></div></div><div class="wolai-block wolai-text"><div><span class="inline-wrap"><b>类与对象</b></span></div></div><code-block class="wolai-block"><div class="wolai-pre"><div data-lang="Go" class="marker"></div><pre><span class="token comment">// 在 Go 语言中可以使用结构体（Structs）对属性进行封装，结构体就像是类的一种简化形式。</span>
+<span class="token keyword">type</span> Rectangle <span class="token keyword">struct</span> <span class="token punctuation">{</span>
+    Length <span class="token builtin">int</span>
+    Width  <span class="token builtin">int</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// Go 语言中也有方法（Methods）</span>
+<span class="token comment">// Go 方法是作用在接收者（receiver）上的一个函数，接收者是某种类型的变量。</span>
+<span class="token comment">// func (recv receiver_type) methodName(params) (return_values) { ... }</span>
+<span class="token keyword">func</span> <span class="token punctuation">(</span>r <span class="token operator">*</span>Rectangle<span class="token punctuation">)</span> <span class="token function">Area</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token builtin">int</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> r<span class="token punctuation">.</span>Length <span class="token operator">*</span> r<span class="token punctuation">.</span>Width
+<span class="token punctuation">}</span></pre></div></code-block><div class="wolai-block wolai-text"><div><span class="inline-wrap"><b>继承</b></span></div></div><div class="wolai-block wolai-text"><div><span class="inline-wrap">在 Go 语言中没有 </span><span class="inline-wrap"><code>extends</code></span><span class="inline-wrap"> 关键字，它使用</span><span class="inline-wrap"><b>在结构体中内嵌匿名类型</b></span><span class="inline-wrap">的方法来实现继承。</span></div></div><blockquote class="wolai-block"><span class="inline-wrap">匿名类型：即这些类型没有显式的名字。</span></blockquote><code-block class="wolai-block"><div class="wolai-pre"><div data-lang="Go" class="marker"></div><pre><span class="token keyword">type</span> Person <span class="token keyword">struct</span> <span class="token punctuation">{</span>
+  name <span class="token builtin">string</span>
+  age <span class="token builtin">uint8</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">type</span> Man <span class="token keyword">struct</span> <span class="token punctuation">{</span>
+  Person
+  size <span class="token builtin">uint8</span>
+<span class="token punctuation">}</span></pre></div></code-block><div class="wolai-block wolai-text"><div><span class="inline-wrap"><b>接口</b></span></div></div><code-block class="wolai-block"><div class="wolai-pre"><div data-lang="Go" class="marker"></div><pre><span class="token comment">// 定义接口</span>
+<span class="token keyword">type</span> Door <span class="token keyword">interface</span> <span class="token punctuation">{</span>
+  <span class="token function">Open</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+  <span class="token function">Close</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// 实现接口</span>
+<span class="token comment">// GO里面实现接口没有implement关键字，</span>
+<span class="token comment">// 只要你的struct实现了接口的所有方法，</span>
+<span class="token comment">// 那么这个struct就是实现了这个接口</span>
+<span class="token comment">// (老实说，我觉得有点搞笑，如果A和B两个接口，定义的方法是一模一样的，那会导致实现了这两个接口)</span>
+<span class="token keyword">type</span> SimpleDoor <span class="token keyword">struct</span> <span class="token punctuation">{</span>
+  
+<span class="token punctuation">}</span>
+
+<span class="token keyword">func</span> <span class="token punctuation">(</span>door <span class="token operator">*</span>SimpleDoor<span class="token punctuation">)</span> <span class="token function">Open</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"open"</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">func</span> <span class="token punctuation">(</span>door <span class="token operator">*</span>SimpleDoor<span class="token punctuation">)</span> <span class="token function">Close</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"close"</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</pre></div></code-block><div class="wolai-block wolai-text"><div><span class="inline-wrap"><b>多态</b></span></div></div><code-block class="wolai-block"><div class="wolai-pre"><div data-lang="Go" class="marker"></div><pre></pre></div></code-block><div class="wolai-block wolai-text"><div></div></div><aside class="bg-cultured wolai-block"><div data-symbol="❄️" class="icon"></div><span class="inline-wrap"><b>make、new、T{}、T()</b></span><span class="inline-wrap">
+make<span class="jill"></span>只能用于 slice,map,channel
+new 用于结构体，返回的是指针
+T{} 创建结构体对象
+T() 类型转换</span></aside><div class="wolai-block wolai-text"><div><span class="inline-wrap"></span><br/></div></div><div class="wolai-bookmark wolai-block"><a href="https://learnku.com/articles/42797#:~:text=go%20%E5%AD%98%E5%9C%A84%20%E7%A7%8D%E7%B1%BB%E5%9E%8B,%E4%BD%BF%E7%94%A8%E8%BF%87%E7%A8%8B%E4%B8%AD%E6%80%BB%E7%BB%93%E5%87%BA%E6%9D%A5%E3%80%82">golang 中的四种类型转换总结 | Go 技术论坛 </a><div class="info-box"><div class="text-pane"><div data-title="golang 中的四种类型转换总结 | Go 技术论坛 "></div><div data-desc="go类型转换 go存在4种类型转换分别为：断言、强制、显式、隐式。 通常说的类型转换是指断言，强制在日常不会使用到、显示是基本的类型转换、隐式使用到但是不会注意到。断言、强制、显式三类在go语法描述中均有说明..."></div><div class="icon-host"><div class="icon icon-image" style="background-image: url(&quot;https://cdn.learnku.com//uploads/communities/sNljssWWQoW6J88O9G37.png!/both/44x44&quot;)"></div><div data-hostname="learnku.com"></div></div></div><div class="preview-pane"></div></div></div><div class="wolai-block wolai-text"><div><span class="inline-wrap"></span><br/></div></div><div class="wolai-block wolai-text"><div><span class="inline-wrap"></span><br/></div></div><h2 class="wolai-block"><span class="inline-wrap">错误处理</span></h2><div class="wolai-block wolai-text"><div><span class="inline-wrap">Go<span class="jill"></span>语言使用</span><span class="inline-wrap"><code>error</code></span><span class="inline-wrap">表示错误</span></div></div><code-block class="wolai-block"><div class="wolai-pre"><div data-lang="Go" class="marker"></div><pre><span class="token keyword">func</span> <span class="token function">Sum</span><span class="token punctuation">(</span>x <span class="token builtin">int</span> <span class="token punctuation">,</span> y <span class="token builtin">int</span><span class="token punctuation">)</span> <span class="token punctuation">(</span><span class="token builtin">int</span><span class="token punctuation">,</span><span class="token builtin">error</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+  <span class="token keyword">if</span> x <span class="token operator">==</span> <span class="token boolean">nil</span> <span class="token operator">||</span> y <span class="token operator">==</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> errors<span class="token punctuation">.</span><span class="token function">New</span><span class="token punctuation">(</span><span class="token string">"num cannot be nil"</span><span class="token punctuation">)</span> <span class="token comment">// 记得引入 errors</span>
+  <span class="token punctuation">}</span>
+  <span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">1</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+  sum <span class="token punctuation">,</span> err <span class="token operator">:=</span> <span class="token function">Sum</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span>
+  <span class="token keyword">if</span> err <span class="token operator">!=</span> <span class="token boolean">nil</span><span class="token punctuation">{</span>
+    <span class="token comment">// handle err</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// panic是Go语言中的一个内置函数,用于终止程序的运行</span>
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+  sum <span class="token punctuation">,</span> err <span class="token operator">:=</span> <span class="token function">Sum</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span>
+  <span class="token keyword">if</span> err <span class="token operator">!=</span> <span class="token boolean">nil</span><span class="token punctuation">{</span>
+    <span class="token function">panic</span><span class="token punctuation">(</span><span class="token string">"err !!!!"</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></pre></div></code-block><h2 class="wolai-block"><span class="inline-wrap">依赖管理</span></h2><div class="wolai-block wolai-text"><div><span class="inline-wrap"><b>安装第三方包</b></span></div></div><code-block class="wolai-block"><div class="wolai-pre"><div data-lang="PowerShell" class="marker"></div><pre><span class="token comment"># 依赖会被下载到环境变量GOPATH指定的路径中</span>
+go get github<span class="token punctuation">.</span>com<span class="token operator">/</span>golang<span class="token operator">/</span>example<span class="token operator">/</span>stringutil</pre></div></code-block><div class="wolai-block wolai-text"><div><span class="inline-wrap"><a href="https://zhuanlan.zhihu.com/p/60703832"><span>拜拜了，GOPATH<span class="jill"></span>君！新版本<span class="jill"></span>Golang<span class="jill"></span>的包管理入门教程</span></a></span></div></div><div class="wolai-block wolai-text"><div><span class="inline-wrap"><a href="https://zhuanlan.zhihu.com/p/311969770"><span>Go 的包管理发展及 go mod 应用</span></a></span></div></div><div class="wolai-block wolai-text"><div><span class="inline-wrap"><a href="https://www.jianshu.com/p/760c97ff644c"><span>go mod<span class="jill"></span>使用</span></a></span></div></div><div class="wolai-block wolai-text"><div><span class="inline-wrap"><a href="https://zhuanlan.zhihu.com/p/105556877"><span>关于<span class="jill"></span>Go Modules，看这一篇文章就够了</span></a></span></div></div><div class="wolai-block wolai-text"><div><span class="inline-wrap"></span><br/></div></div><h2 class="wolai-block"><span class="inline-wrap">IO</span></h2><div class="wolai-block wolai-text"><div><span class="inline-wrap"><b>读取文件</b></span></div></div><code-block class="wolai-block"><div class="wolai-pre"><div data-lang="Go" class="marker"></div><pre>path <span class="token operator">:=</span> <span class="token string">"/books.txt"</span>
+content<span class="token punctuation">,</span> err <span class="token operator">:=</span> ioutil<span class="token punctuation">.</span><span class="token function">ReadFile</span><span class="token punctuation">(</span>path<span class="token punctuation">)</span>
+<span class="token keyword">if</span> err <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span>
+  log<span class="token punctuation">.</span><span class="token function">Fatal</span><span class="token punctuation">(</span><span class="token string">"read file "</span><span class="token punctuation">,</span> path<span class="token punctuation">,</span> <span class="token string">" failure "</span><span class="token punctuation">,</span> err<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+<span class="token function">print</span><span class="token punctuation">(</span><span class="token function">string</span><span class="token punctuation">(</span>content<span class="token punctuation">)</span><span class="token punctuation">)</span></pre></div></code-block><div class="wolai-block wolai-text"><div><span class="inline-wrap"><b>创建文件</b></span></div></div><code-block class="wolai-block"><div class="wolai-pre"><div data-lang="Go" class="marker"></div><pre><span class="token comment">// 利用写入数据函数，文件不存在则创建的特性来创建文件</span>
+path <span class="token operator">:=</span> <span class="token string">"/Users/0xffff0/newFile.txt"</span>
+content <span class="token operator">:=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token function">byte</span><span class="token punctuation">(</span><span class="token string">"hello-world"</span><span class="token punctuation">)</span>
+ioutil<span class="token punctuation">.</span><span class="token function">WriteFile</span><span class="token punctuation">(</span>path<span class="token punctuation">,</span> content<span class="token punctuation">,</span> <span class="token number">0666</span><span class="token punctuation">)</span></pre></div></code-block><div class="wolai-block wolai-text"><div><span class="inline-wrap"><b>写入文件</b></span></div></div><code-block class="wolai-block"><div class="wolai-pre"><div data-lang="Go" class="marker"></div><pre><span class="token comment">// 它会先删除文件原来的内容，然后再写入新的内容,如果文件已经存在，不会修改文件的权限</span>
+path <span class="token operator">:=</span> <span class="token string">"/Users/0xffff0/newFile.txt"</span>
+content <span class="token operator">:=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token function">byte</span><span class="token punctuation">(</span><span class="token string">"hello-world"</span><span class="token punctuation">)</span>
+ioutil<span class="token punctuation">.</span><span class="token function">WriteFile</span><span class="token punctuation">(</span>path<span class="token punctuation">,</span> content<span class="token punctuation">,</span> <span class="token number">0666</span><span class="token punctuation">)</span>
+</pre></div></code-block><div class="wolai-block wolai-text"><div><span class="inline-wrap"><b>创建目录</b></span></div></div><code-block class="wolai-block"><div class="wolai-pre"><div data-lang="Go" class="marker"></div><pre><span class="token comment">// 如果已存在，不做任何操作，好傻逼，为什么ioutil里面没有这个操作</span>
+path <span class="token operator">:=</span> <span class="token string">"/Users/0xffff0/fileDir"</span>
+err<span class="token operator">:=</span> os<span class="token punctuation">.</span><span class="token function">Mkdir</span><span class="token punctuation">(</span>path<span class="token punctuation">,</span> <span class="token number">0755</span><span class="token punctuation">)</span>
+<span class="token keyword">if</span> err <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span>
+  log<span class="token punctuation">.</span><span class="token function">Fatal</span><span class="token punctuation">(</span>err<span class="token punctuation">)</span>
+<span class="token punctuation">}</span></pre></div></code-block><div class="wolai-block wolai-text"><div><span class="inline-wrap"><b>获取目录内容</b></span></div></div><code-block class="wolai-block"><div class="wolai-pre"><div data-lang="Go" class="marker"></div><pre>path <span class="token operator">:=</span> <span class="token string">"/Users/0xffff0/fileDir"</span>
+files<span class="token punctuation">,</span> err <span class="token operator">:=</span> ioutil<span class="token punctuation">.</span><span class="token function">ReadDir</span><span class="token punctuation">(</span>path<span class="token punctuation">)</span>
+<span class="token keyword">if</span> err <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span>
+  log<span class="token punctuation">.</span><span class="token function">Fatal</span><span class="token punctuation">(</span>err<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">for</span> <span class="token boolean">_</span><span class="token punctuation">,</span> file <span class="token operator">:=</span> <span class="token keyword">range</span> files <span class="token punctuation">{</span>
+  <span class="token function">println</span><span class="token punctuation">(</span>file<span class="token punctuation">.</span><span class="token function">Mode</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> file<span class="token punctuation">.</span><span class="token function">Name</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span></pre></div></code-block><div class="wolai-block wolai-text"><div><span class="inline-wrap"><b>删除文件</b></span></div></div><code-block class="wolai-block"><div class="wolai-pre"><div data-lang="Go" class="marker"></div><pre>os<span class="token punctuation">.</span><span class="token function">Remove</span><span class="token punctuation">(</span><span class="token string">"./file.txt"</span><span class="token punctuation">)</span></pre></div></code-block><div class="wolai-block wolai-text"><div><span class="inline-wrap"><b>删除目录</b></span></div></div><code-block class="wolai-block"><div class="wolai-pre"><div data-lang="Go" class="marker"></div><pre>os<span class="token punctuation">.</span><span class="token function">RemoveAll</span><span class="token punctuation">(</span><span class="token string">"./dir"</span><span class="token punctuation">)</span></pre></div></code-block><div class="wolai-block wolai-text"><div><span class="inline-wrap"><b>文件拷贝</b></span></div></div><code-block class="wolai-block"><div class="wolai-pre"><div data-lang="Go" class="marker"></div><pre>
+from<span class="token punctuation">,</span> err <span class="token operator">:=</span> os<span class="token punctuation">.</span><span class="token function">Open</span><span class="token punctuation">(</span><span class="token string">"from.txt"</span><span class="token punctuation">)</span>
+<span class="token keyword">if</span> err <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span>
+  log<span class="token punctuation">.</span><span class="token function">Fatal</span><span class="token punctuation">(</span>err<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">defer</span> from<span class="token punctuation">.</span><span class="token function">Close</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+to<span class="token punctuation">,</span> err <span class="token operator">:=</span> os<span class="token punctuation">.</span><span class="token function">OpenFile</span><span class="token punctuation">(</span><span class="token string">"to.txt"</span><span class="token punctuation">,</span> os<span class="token punctuation">.</span>O_RDWR<span class="token operator">|</span>os<span class="token punctuation">.</span>O_CREATE<span class="token punctuation">,</span> <span class="token number">066</span><span class="token punctuation">)</span>
+<span class="token keyword">if</span> err <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span>
+  log<span class="token punctuation">.</span><span class="token function">Fatal</span><span class="token punctuation">(</span>err<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">defer</span> to<span class="token punctuation">.</span><span class="token function">Close</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+<span class="token boolean">_</span><span class="token punctuation">,</span> err <span class="token operator">=</span> io<span class="token punctuation">.</span><span class="token function">Copy</span><span class="token punctuation">(</span>to<span class="token punctuation">,</span> from<span class="token punctuation">)</span>
+<span class="token keyword">if</span> err <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span>
+  log<span class="token punctuation">.</span><span class="token function">Fatalln</span><span class="token punctuation">(</span>err<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// 为什么不用ioutil的ReadFile和WriteFile？ 因为上面的写法可以用零拷贝</span></pre></div></code-block><h2 class="wolai-block"><span class="inline-wrap">— — — — — — — </span></h2><h2 class="wolai-block"><span class="inline-wrap">并发</span></h2><code-block class="wolai-block"><div class="wolai-pre"><div data-lang="Go" class="marker"></div><pre><span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  c <span class="token operator">:=</span> <span class="token function">make</span><span class="token punctuation">(</span><span class="token keyword">chan</span> <span class="token builtin">string</span><span class="token punctuation">)</span>
+  <span class="token keyword">go</span> <span class="token function">sleep</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>c<span class="token punctuation">)</span> <span class="token comment">// 使用GOROUTINE执行sleep方法</span>
+  msg<span class="token operator">:=</span> <span class="token operator">&lt;-</span>c
+  log<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>msg<span class="token punctuation">)</span>
+  <span class="token function">close</span><span class="token punctuation">(</span>c<span class="token punctuation">)</span> <span class="token comment">// 关闭通道</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">func</span> <span class="token function">sleep</span><span class="token punctuation">(</span>c <span class="token operator">*</span><span class="token keyword">chan</span> <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  log<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"before sleep"</span><span class="token punctuation">)</span>
+  time<span class="token punctuation">.</span><span class="token function">Sleep</span><span class="token punctuation">(</span>time<span class="token punctuation">.</span>Second <span class="token operator">*</span> <span class="token number">1</span><span class="token punctuation">)</span>
+  log<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"after sleep"</span><span class="token punctuation">)</span>
+  <span class="token operator">*</span>c <span class="token operator">&lt;-</span> <span class="token string">"sleep well"</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// 设置通道的读写权限</span>
+
+<span class="token keyword">func</span> <span class="token function">channelReader</span><span class="token punctuation">(</span>readableChan <span class="token operator">&lt;-</span><span class="token keyword">chan</span> <span class="token builtin">string</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+  msg <span class="token operator">:=</span> <span class="token operator">&lt;-</span> readableChan
+<span class="token punctuation">}</span>
+
+<span class="token keyword">func</span> <span class="token function">channelWriter</span><span class="token punctuation">(</span>writableChan <span class="token keyword">chan</span><span class="token operator">&lt;-</span> <span class="token builtin">string</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+  writableChan <span class="token operator">&lt;-</span> <span class="token string">"hello world"</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// select</span>
+<span class="token comment">// 假设有多个Goroutine，而程序将根据最先返回的Goroutine执行相应的操作，</span>
+<span class="token comment">// 此时可使用select语句。select语句类似于第5章介绍的switch语句，</span>
+<span class="token comment">// 它为通道创建一系列接收者，并执行最先收到消息的接收者。</span>
+
+<span class="token keyword">select</span> <span class="token punctuation">{</span>
+  <span class="token keyword">case</span> msg1 <span class="token operator">:=</span> <span class="token operator">&lt;-</span>channel1<span class="token punctuation">:</span>
+    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"received"</span><span class="token punctuation">,</span>msg1<span class="token punctuation">)</span>
+  <span class="token keyword">case</span> msg2 <span class="token operator">:=</span> <span class="token operator">&lt;-</span>channel1<span class="token punctuation">:</span>
+    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"received"</span><span class="token punctuation">,</span>msg2<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</pre></div></code-block><h2 class="wolai-block"><span class="inline-wrap">JSON</span></h2><code-block class="wolai-block"><div class="wolai-pre"><div data-lang="Go" class="marker"></div><pre><span class="token keyword">type</span> Person <span class="token keyword">struct</span><span class="token punctuation">{</span>
+  Name <span class="token builtin">string</span>
+  Age <span class="token builtin">uint8</span>
+  Hobbies <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">string</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// 序列化</span>
+jsonByte<span class="token punctuation">,</span> err <span class="token operator">:=</span> json<span class="token punctuation">.</span><span class="token function">Marshal</span><span class="token punctuation">(</span>p<span class="token punctuation">)</span>
+<span class="token keyword">if</span> err <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span>
+  log<span class="token punctuation">.</span><span class="token function">Fatalln</span><span class="token punctuation">(</span>err<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token function">string</span><span class="token punctuation">(</span>jsonByte<span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token comment">// 1.json.Marshal会忽略掉那些私有的属性(非大写字母开头的属性)</span>
+<span class="token comment">// 2.因为1.的原因，导致打印出来的JSON字符串的Key是首字母大写的，不符合JSON的约定</span>
+
+<span class="token keyword">type</span> Person <span class="token keyword">struct</span><span class="token punctuation">{</span>
+  Name <span class="token builtin">string</span>        <span class="token string">`json:"name"`</span>
+  Age <span class="token builtin">uint8</span>           <span class="token string">`json:"age"`</span>
+  Hobbies <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">string</span>   <span class="token string">`json:"hobbies,omitempty"`</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// 反序列化</span>
+np <span class="token operator">:=</span> person<span class="token punctuation">.</span>Person<span class="token punctuation">{</span><span class="token punctuation">}</span>
+err <span class="token operator">=</span> json<span class="token punctuation">.</span><span class="token function">Unmarshal</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token function">byte</span><span class="token punctuation">(</span>jsonStr<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>np<span class="token punctuation">)</span></pre></div></code-block><h2 class="wolai-block"><span class="inline-wrap">网络编程</span></h2><details class="wolai-block"><summary><div class="marker"></div><span class="inline-wrap">一个简单的<span class="jill"></span>echo<span class="jill"></span>服务器</span></summary><code-block class="wolai-block"><div class="wolai-pre"><div data-lang="Go" class="marker"></div><pre><span class="token keyword">package</span> main
+
+<span class="token keyword">import</span> <span class="token punctuation">(</span>
+  <span class="token string">"bufio"</span>
+  <span class="token string">"net"</span>
+<span class="token punctuation">)</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  server<span class="token punctuation">,</span> <span class="token boolean">_</span> <span class="token operator">:=</span> net<span class="token punctuation">.</span><span class="token function">Listen</span><span class="token punctuation">(</span><span class="token string">"tcp"</span><span class="token punctuation">,</span> <span class="token string">"127.0.0.1:8080"</span><span class="token punctuation">)</span>
+  <span class="token keyword">for</span><span class="token punctuation">{</span>
+    conn<span class="token punctuation">,</span> <span class="token boolean">_</span> <span class="token operator">:=</span> server<span class="token punctuation">.</span><span class="token function">Accept</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">go</span> <span class="token function">process</span><span class="token punctuation">(</span>conn<span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// 为什么这里不可以用指针作为参数？</span>
+<span class="token comment">// 永远不要使用一个指针指向一个接口类型，因为它已经是一个指针。</span>
+<span class="token keyword">func</span> <span class="token function">process</span><span class="token punctuation">(</span>conn net<span class="token punctuation">.</span>Conn<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">defer</span> conn<span class="token punctuation">.</span><span class="token function">Close</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+  <span class="token keyword">for</span> <span class="token punctuation">{</span>
+    reader <span class="token operator">:=</span> bufio<span class="token punctuation">.</span><span class="token function">NewReader</span><span class="token punctuation">(</span>conn<span class="token punctuation">)</span>
+    <span class="token keyword">var</span> buf <span class="token punctuation">[</span><span class="token number">128</span><span class="token punctuation">]</span><span class="token builtin">byte</span>
+    n<span class="token punctuation">,</span> <span class="token boolean">_</span> <span class="token operator">:=</span> reader<span class="token punctuation">.</span><span class="token function">Read</span><span class="token punctuation">(</span>buf<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+    msg<span class="token operator">:=</span> <span class="token function">string</span><span class="token punctuation">(</span>buf<span class="token punctuation">[</span><span class="token punctuation">:</span>n<span class="token punctuation">]</span><span class="token punctuation">)</span>
+    conn<span class="token punctuation">.</span><span class="token function">Write</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token function">byte</span><span class="token punctuation">(</span>msg<span class="token punctuation">)</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></pre></div></code-block><div class="wolai-block wolai-text"><div><span class="inline-wrap"></span><br/></div></div><code-block class="wolai-block"><div class="wolai-pre"><div data-lang="Go" class="marker"></div><pre><span class="token keyword">import</span> <span class="token punctuation">(</span>
+  <span class="token string">"fmt"</span>
+  <span class="token string">"net"</span>
+<span class="token punctuation">)</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  conn<span class="token punctuation">,</span> <span class="token boolean">_</span> <span class="token operator">:=</span> net<span class="token punctuation">.</span><span class="token function">Dial</span><span class="token punctuation">(</span><span class="token string">"tcp"</span><span class="token punctuation">,</span> <span class="token string">"127.0.0.1:8080"</span><span class="token punctuation">)</span>
+  <span class="token keyword">defer</span> conn<span class="token punctuation">.</span><span class="token function">Close</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+  conn<span class="token punctuation">.</span><span class="token function">Write</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token function">byte</span><span class="token punctuation">(</span><span class="token string">"hello world"</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+  buf <span class="token operator">:=</span> <span class="token punctuation">[</span><span class="token number">512</span><span class="token punctuation">]</span><span class="token builtin">byte</span><span class="token punctuation">{</span><span class="token punctuation">}</span>
+  n<span class="token punctuation">,</span> <span class="token boolean">_</span> <span class="token operator">:=</span> conn<span class="token punctuation">.</span><span class="token function">Read</span><span class="token punctuation">(</span>buf<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+  fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token function">string</span><span class="token punctuation">(</span>buf<span class="token punctuation">[</span><span class="token punctuation">:</span>n<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span></pre></div></code-block><div class="wolai-block wolai-text"><div><span class="inline-wrap"></span><br/></div></div><aside class="bg-cultured wolai-block"><div data-symbol="❄️" class="icon"></div><span class="inline-wrap">数组和切片、byte<span class="jill"></span>和<span class="jill"></span>string、make 和 new  和 ()</span></aside></details></article><footer></footer></body></html>

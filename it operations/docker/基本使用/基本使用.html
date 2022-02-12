@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="zh-Hans-CN"><head><meta charset="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=Edge"/><link rel="stylesheet" type="text/css" href="../../../css/modern-norm.min.css"/><link rel="stylesheet" type="text/css" href="../../../css/prism.min.css"/><link rel="stylesheet" type="text/css" href="../../../css/katex.min.css"/><link rel="stylesheet" type="text/css" href="../../../css/wolai.css"/><title>基本使用 - wolai 笔记</title><link rel="shortcut icon" href="data:image/svg+xml,%3Csvg xmlns=&apos;http://www.w3.org/2000/svg&apos; viewBox=&apos;0 0 800 800&apos;%3E%3Cdefs%3E%3Cstyle%3E.cls-1%7Bfill:%23fff;%7D%3C/style%3E%3C/defs%3E%3Cg%3E%3Cpath class=&apos;cls-1&apos; d=&apos;M610.08,0c66,0,90,6.88,114.13,19.79a134.62,134.62,0,0,1,56,56l2.28,4.4C793.93,103,800,127.88,800,189.92V610.08l-.08,11.56c-.78,57.38-7.58,79.89-19.71,102.57a134.62,134.62,0,0,1-56,56l-4.4,2.28C697,793.93,672.12,800,610.08,800H189.92l-11.56-.08c-57.38-.78-79.89-7.58-102.57-19.71a134.62,134.62,0,0,1-56-56l-2.28-4.4C6.44,697.75.4,673.72,0,616L0,189.92c0-66,6.88-90,19.79-114.13a134.62,134.62,0,0,1,56-56l4.4-2.28C102.25,6.44,126.28.4,184,0Z&apos;/%3E%3Cpath d=&apos;M610.08,0c66,0,90,6.88,114.13,19.79a134.62,134.62,0,0,1,56,56l2.28,4.4C793.93,103,800,127.88,800,189.92V610.08l-.08,11.56c-.78,57.38-7.58,79.89-19.71,102.57a134.62,134.62,0,0,1-56,56l-4.4,2.28C697,793.93,672.12,800,610.08,800H189.92l-11.56-.08c-57.38-.78-79.89-7.58-102.57-19.71a134.62,134.62,0,0,1-56-56l-2.28-4.4C6.44,697.75.4,673.72,0,616L0,189.92c0-66,6.88-90,19.79-114.13a134.62,134.62,0,0,1,56-56l4.4-2.28C102.25,6.44,126.28.4,184,0Zm4.72,88.9H185.2L172.42,89c-32.78.62-43.68,3.24-54.71,9.14a45.84,45.84,0,0,0-19.54,19.54c-6.61,12.36-9.11,24.55-9.27,67.49V614.8L89,627.58c.62,32.78,3.24,43.68,9.14,54.71a45.84,45.84,0,0,0,19.54,19.54c12.36,6.61,24.55,9.11,67.49,9.27H610.08c46.79,0,59.41-2.44,72.21-9.28a45.84,45.84,0,0,0,19.54-19.54c6.61-12.36,9.11-24.55,9.27-67.49V189.92c0-46.79-2.44-59.41-9.28-72.21a45.84,45.84,0,0,0-19.54-19.54C669.93,91.56,657.74,89.06,614.8,88.9ZM233.33,493.33A73.34,73.34,0,1,1,160,566.67,73.35,73.35,0,0,1,233.33,493.33Z&apos;/%3E%3C/g%3E%3C/svg%3E"></link></head><body><header><div class="image"></div><div class="title"><div class="banner"><div class="icon"></div></div><div data-title="基本使用" class="main-title"></div></div></header><article><h1 class="wolai-block"><span class="inline-wrap">镜像</span></h1><code-block class="wolai-block"><div class="wolai-pre"><div data-lang="Docker" class="marker"></div><pre><span class="token comment"># 查看本地镜像</span>
+docker iamge ls
+<span class="token comment"># 搜索镜像</span>
+docker search ubuntu
+<span class="token comment"># 获取镜像</span>
+docker iamge pull [opt] [Docker Registry address[:port]/]iamgeName[:label]
+docker iamge pull ubuntu
+docker image pull ubuntu:latest
+docker image pull ubuntu:sha256:626ffe58f6e7566e00254b638eb7e0f3b11d4da9675088f4781a50ae288f3322
+docker image pull ubuntu:xenial-20210804
+docker image pull myregistry.local:5000/testing/test-image
+<span class="token comment"># 删除镜像</span>
+docker image rm [选项] &lt;镜像1> [&lt;镜像2> ...]
+<span class="token comment"># 其中，&lt;镜像> 可以是 镜像短 ID、镜像长 ID、镜像名 或者 镜像摘要。</span>
+<span class="token comment"># 镜像的详细信息</span>
+docker image inspect img-id
+<span class="token comment">#--------------------------------------------------------</span>
+<span class="token comment"># 创建镜像</span>
+  <span class="token comment"># 基于容器创建</span>
+  docker container commit 
+  <span class="token comment"># 基于本地模板</span>
+  cat ubuntu-14.04xxx.tar.gz | docker import - ubuntu:14.04
+<span class="token comment"># 镜像的保存与读取</span>
+  docker image save
+  docker image load</pre></div></code-block><h1 class="wolai-block"><span class="inline-wrap">容器</span></h1><code-block class="wolai-block"><div class="wolai-pre"><div data-lang="Docker" class="marker"></div><pre><span class="token comment"># 创建容器</span>
+docker container create ubuntu
+<span class="token comment"># 查看容器</span>
+docker container ls -a
+<span class="token comment"># 启动容器 </span>
+docker container start  容器ID
+<span class="token comment"># 进入容器</span>
+docker container attach 容器ID
+<span class="token comment"># 终止容器</span>
+docker container stop 容器ID
+<span class="token comment"># 删除容器</span>
+docker container rm 容器ID
+<span class="token comment"># 退出容器</span>
+按住ctrl然后按p按q
+
+<span class="token comment"># create run exec</span>
+<span class="token comment"># create 创建一个新的容器</span>
+<span class="token comment"># create 跟 run是相差无几的，只是前者相对少了几个参数而已</span>
+<span class="token comment"># 其中最重要的就是少了一个 -d 参数，具体看下面 run的用法</span>
+
+<span class="token comment"># run 创建一个新的容器，然后在其中运行一条命令</span>
+docker container run ubuntu:18.04 /bin/echo 'Hello world'
+docker container run -it ubuntu:18.04 /bin/bash
+-i 让容器的标准输入保持打开
+-t 分配一个伪终端（pseudo-tty）并绑定到容器的标准输入上 
+
+<span class="token comment"># docker exec 让运行中的容器执行一条命令</span>
+docker container exec container-name /bin/echo "hello"
+docker container exec -it container-name /bin/bash # 因为与bash交互，所以要用-it
+
+<span class="token comment"># 后台运行</span>
+docker的意义就是创建一个容器，然后在容器中运行目标程序。
+docker container run 创建的容器默认是前台运行，前台运行方式下目标程序的输出会直接打印在当前宿主机下
+docker container run ubuntu /bin/echo "hello"
+
+通过 -d 参数，可以让docker容器在后台中运行
+docker container run -d ubuntu /bin/echo "hello"
+
+体会以下命令，屏幕会显示什么？ 容器处于启动还是停止状态？
+docker container run --name u1 ubuntu /bin/bash
+docker container run --name u2 -it ubuntu /bin/bash
+docker container run --name u3 -dit ubuntu /bin/bash
+<span class="token comment"># u1 创建容器，容器处于停止状态</span>
+<span class="token comment"># u2 创建容器，进入与容器bash交互状态</span>
+<span class="token comment">#    正确退出容器后(ctrl+p+q)，容器处于运行状态</span>
+<span class="token comment">#    通过exit退出容器后，容器处于停止状态</span>
+<span class="token comment">#    docker的意义就是创建一个容器，然后在容器中运行目标程序，如果目标程序终止了</span>
+<span class="token comment">#    相应的，容器也会进入停止状态，u2的目标程序是/bin/bash</span>
+<span class="token comment">#    当你exit退出该bash时，容器的目标程序也就终止了，所以容器进入停止状态</span>
+<span class="token comment"># u3 创建容器，打印容器id，容器处于运行状态，需要attach进入容器</span></pre></div></code-block><h1 class="wolai-block"><span class="inline-wrap">仓库</span></h1><div class="wolai-block wolai-text"><div><span class="inline-wrap">仓库（Repository）是集中存放镜像的地方。以下介绍一下 </span><span class="inline-wrap"><a href="https://hub.docker.com/"><span>Docker Hub</span></a></span><span class="inline-wrap">。当然不止 docker hub，只是远程的服务商不一样，操作都是一样的。</span></div></div><code-block class="wolai-block"><div class="wolai-pre"><div data-lang="Docker" class="marker"></div><pre><span class="token comment"># 登录仓库</span>
+docker login
+
+<span class="token comment"># 退出仓库</span>
+docker logout
+
+<span class="token comment"># 疑问</span>
+<span class="token comment"># 1.登录仓库后，拉去镜像是从仓库拉取吗？如果仓库没有，是否会去官方仓库拉取？</span>
+<span class="token comment"># 2.</span></pre></div></code-block><h1 class="wolai-block"><span class="inline-wrap">Dockerfile</span></h1><div class="wolai-block wolai-text"><div><span class="inline-wrap">Dockerfile<span class="jill"></span>本质就是一个配置文件，使用<span class="jill"></span>Dockerfile<span class="jill"></span>可以快速创建自定义的</span><span class="inline-wrap"><b>镜像</b></span><span class="inline-wrap">。</span></div></div><code-block class="wolai-block"><div class="wolai-pre"><div data-lang="PowerShell" class="marker"></div><pre>docker image build dockerfile<span class="token operator">-</span>path image<span class="token operator">-</span>name</pre></div></code-block><div class="wolai-block wolai-text"><div><span class="inline-wrap">Dockerfile<span class="jill"></span>由一行行命令语句组成，主要分为四部分：</span></div></div><ul class="wolai-block"><li><div class="marker"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 14.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5z"></path></svg></div><span class="inline-wrap">基础镜像信息</span></li><li><div class="marker"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 14.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5z"></path></svg></div><span class="inline-wrap">维护者信息</span></li><li><div class="marker"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 14.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5z"></path></svg></div><span class="inline-wrap">镜像操作指令</span></li><li><div class="marker"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 14.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5z"></path></svg></div><span class="inline-wrap">容器启动时执行指令</span></li></ul><code-block class="wolai-block"><div class="wolai-pre"><div data-lang="Docker" class="marker"></div><pre><span class="token comment"># This dockerfile uses the redis image</span>
+<span class="token comment"># VERSION 2 - DEITION 1</span>
+<span class="token comment"># Author: hdr</span>
+<span class="token comment"># Command format: instruction [argumetns/command]..</span>
+
+<span class="token comment"># 第一行必须指定基于的基础镜像</span>
+<span class="token instruction"><span class="token keyword">FROM</span> redis <span class="token keyword">AS</span> hdr-redis</span>
+<span class="token comment"># 维护者信息</span>
+<span class="token instruction"><span class="token keyword">MAINTAINER</span> hdr huangdaren1997@gmail.com</span>
+<span class="token comment"># 镜像的操作指令</span>
+....
+<span class="token comment"># 容器启动时执行指令</span></pre></div></code-block><div class="wolai-block wolai-text"><div><span class="inline-wrap"><b>指令详解</b></span></div></div><code-block class="wolai-block"><div class="wolai-pre"><div data-lang="Docker" class="marker"></div><pre>FORM &lt;iamge> 或 FORM &lt;image>:&lt;tag>
+<span class="token instruction"><span class="token keyword">MAINTAINER</span> &lt;name></span>
+
+<span class="token comment"># 每条RUN指令将在当前镜像基础上执行指定命令，并提交为新的镜像。</span>
+<span class="token instruction"><span class="token keyword">RUN</span> &lt;command> 或 RUN [<span class="token string">"executable"</span>,<span class="token string">"param1"</span>,<span class="token string">"param2"</span>]</span>
+<span class="token instruction"><span class="token keyword">RUN</span> apt update &amp;&amp; apt install -y vim</span>
+
+<span class="token comment"># CMD 容器启动时会执行的命令，每个Dockerfile只能有一个CMD命令，如果有多条，则执行最后一条</span>
+<span class="token instruction"><span class="token keyword">CMD</span> echo <span class="token string">"hello world"</span> # PS:如果在启动容器的时候指定了运行的命令，则运行指定的命令</span>
+
+<span class="token comment"># 暴露端口</span>
+<span class="token instruction"><span class="token keyword">EXPOSE</span> 80 443</span>
+
+<span class="token comment"># ENV &lt;key> &lt;value> 指定一个环境变量，会被后续的RUN指令使用，并且在容器运行时保持</span>
+<span class="token instruction"><span class="token keyword">ENV</span> JAVA_HOME xxxxxxxxx</span>
+<span class="token instruction"><span class="token keyword">ENV</span> PATH <span class="token variable">$JAVA_HOME</span>/bin:<span class="token variable">$PATH</span></span>
+<span class="token comment"># ADD &lt;src> &lt;dest> 复制文件，可以是dockerfile的相对路径、URL、tar文件</span>
+
+<span class="token comment"># ENTRYPOINT 容器启动后执行的命令,也是只能有一个</span>
+<span class="token instruction"><span class="token keyword">ENTRYPOINT</span> echo <span class="token string">"hello world"</span></span>
+
+<span class="token comment"># VOLUME </span>
+......</pre></div></code-block><h1 class="wolai-block"><span class="inline-wrap">Docker Compose</span></h1><div class="wolai-block wolai-text"><div><span class="inline-wrap">Compose 是用于定义和运行多容器 Docker 应用程序的工具。通过 Compose，您可以使用 YML 文件来配置应用程序需要的所有服务。然后，使用一个命令，就可以从 YML 文件配置中创建并启动所有服务。</span></div></div><div class="wolai-block wolai-text"><div><span class="inline-wrap"></span><br/></div></div><h1 class="wolai-block"><span class="inline-wrap">网络配置</span></h1><div class="wolai-block wolai-text"><div><span class="inline-wrap">Docker<span class="jill"></span>通过一些网络驱动（Network drivers）来实现通信。这些驱动分别有</span></div></div><ul class="wolai-block"><li><div class="marker"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 14.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5z"></path></svg></div><span class="inline-wrap">host：用于容器与宿主主机的通信</span></li><li><div class="marker"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 14.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5z"></path></svg></div><span class="inline-wrap">bridge： 默认的网络驱动，用于容器间的通信</span></li><li><div class="marker"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 14.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5z"></path></svg></div><span class="inline-wrap">overlay：</span></li><li><div class="marker"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 14.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5z"></path></svg></div><span class="inline-wrap">macvlan：为容器指定一个<span class="jill"></span>MAC<span class="jill"></span>地址</span></li><li><div class="marker"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 14.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5z"></path></svg></div><span class="inline-wrap">none：终止该容器的所有网络</span></li></ul><h2 class="wolai-block"><span class="inline-wrap">host networking</span></h2><div class="wolai-block wolai-text"><div><span class="inline-wrap">创建一个<span class="jill"></span>nginx<span class="jill"></span>容器，然后把容器的<span class="jill"></span>80<span class="jill"></span>端口绑定到宿主主机的<span class="jill"></span>8080<span class="jill"></span>端口，通过宿主主机访问<span class="jill"></span>nginx<span class="jill"></span>页面</span></div></div><code-block class="wolai-block"><div class="wolai-pre"><div data-lang="PowerShell" class="marker"></div><pre>docker image pull nginx
+docker container create <span class="token operator">-</span>it <span class="token operator">-</span>p 8080:80 <span class="token operator">--</span>name my_nginx nginx
+docker container <span class="token function">start</span> my_nginx</pre></div></code-block><div class="wolai-block wolai-text"><div><span class="inline-wrap"><a href="https://stackoverflow.com/questions/19335444/how-do-i-assign-a-port-mapping-to-an-existing-docker-container"><span>How do I assign a port mapping to an existing Docker container?</span></a></span></div></div><h2 class="wolai-block"><span class="inline-wrap">bridge network</span></h2><h3 class="wolai-block"><span class="inline-wrap">使用默认的桥接网络</span></h3><code-block class="wolai-block"><div class="wolai-pre"><div data-lang="PowerShell" class="marker"></div><pre>docker run <span class="token operator">-</span>dit <span class="token operator">--</span>name ubt1 ubuntu
+docker run <span class="token operator">-</span>dit <span class="token operator">--</span>name ubt2 ubuntu
+docker network inspect bridge <span class="token comment"># 在Containers可以看到目前具有的容器，以及容器的ip地址</span>
+docker container attach ubt1
+apt install <span class="token operator">-</span>y net<span class="token operator">-</span>tools <span class="token comment"># 安装ifconfig</span>
+apt install <span class="token operator">-</span>y iputils<span class="token operator">-</span>ping <span class="token comment"># 安装ping 工具</span>
+ping 172<span class="token punctuation">.</span>17<span class="token punctuation">.</span>0<span class="token punctuation">.</span>3 <span class="token comment"># ping另一个容器的ip地址</span></pre></div></code-block><div class="wolai-block wolai-text"><div><span class="inline-wrap">官方不建议在生产环境下使用这种网络连接</span></div></div><h3 class="wolai-block"><span class="inline-wrap">用户定义桥接网络</span></h3><code-block class="wolai-block"><div class="wolai-pre"><div data-lang="PowerShell" class="marker"></div><pre><span class="token comment"># 自定义一个桥接网络</span>
+docker network create <span class="token operator">--</span>driver bridge ubt<span class="token operator">-</span>net
+<span class="token comment"># 创建3个容器，一个加入ubt-net,一个加入bridge,一个两个都加入</span>
+docker run <span class="token operator">-</span>dit <span class="token operator">--</span>name ubt1 <span class="token operator">--</span>netowork ubt<span class="token operator">-</span>net  ubuntu bash
+docker run <span class="token operator">-</span>dit <span class="token operator">--</span>name ubt2  ubuntu bash
+docker run <span class="token operator">-</span>dit <span class="token operator">--</span>name ubt3  ubuntu bash
+docker network connect ubt<span class="token operator">-</span>net ubt3
+<span class="token comment"># 3既可以与1相互访问，也可以与2相互访问，但是1和2不能相互访问</span></pre></div></code-block><div class="wolai-block wolai-text"><div><span class="inline-wrap">这种方案有什么优点呢？那就是在<span class="jill"></span>ping<span class="jill"></span>的时候，你可以使用</span><span class="inline-wrap"><code>ping ubt4</code></span><span class="inline-wrap"> 而不是</span><span class="inline-wrap"><code>ping ip</code></span></div></div><h2 class="wolai-block"><span class="inline-wrap">overlay networks</span></h2><div class="wolai-block wolai-text"><div><span class="inline-wrap">用来解决<span class="jill"></span>swarm services<span class="jill"></span>的网络问题。</span></div></div><div class="wolai-block wolai-text"><div><span class="inline-wrap">简单来说，swarm<span class="jill"></span>允许我们以节点（node）的方式组织集群（cluster）;每个节点上面可以部署一个或者多个服务（service）;每个服务又可以包括一个或者多个（container）</span></div></div><h1 class="wolai-block"><span class="inline-wrap">数据管理</span></h1><h2 class="wolai-block"><span class="inline-wrap">三种数据管理方式</span></h2><div class="wolai-block wolai-text"><div><span class="inline-wrap">默认的，容器中创建的所有文件都被存储在容器层面，也就是说</span></div></div><ul class="wolai-block"><li><div class="marker"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 14.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5z"></path></svg></div><span class="inline-wrap">容器被删除了，数据也就不复存在</span></li><li><div class="marker"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 14.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5z"></path></svg></div><span class="inline-wrap">很难移动这些数据</span></li><li><div class="marker"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 14.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5z"></path></svg></div><span class="inline-wrap">性能也一般</span></li></ul><div class="wolai-block wolai-text"><div><span class="inline-wrap">Docker<span class="jill"></span>为我们提供了两种方式对文件进行永久存储，如果你用的是<span class="jill"></span>Linux，还有第三种方法，不过这种方式只是把文件存储在内存中。以下是这三种方式:</span></div></div><ul class="wolai-block"><li><div class="marker"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 14.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5z"></path></svg></div><span class="inline-wrap">volume:与本地文件系统中被<span class="jill"></span>Docker<span class="jill"></span>管理的那部分挂钩</span></li><li><div class="marker"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 14.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5z"></path></svg></div><span class="inline-wrap">bind:直接与本地文件系统挂钩</span></li><li><div class="marker"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 14.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5z"></path></svg></div><span class="inline-wrap">tmpfs:存储在内存中，只有<span class="jill"></span>Linux<span class="jill"></span>系统可以使用</span></li></ul><div class="wolai-block wolai-center"><figure><img src="media/docker-types-of-mounts.png" style="width: 760px"/></figure></div><h3 class="wolai-block"><span class="inline-wrap">什么时候用<span class="jill"></span>volume</span></h3><ul class="wolai-block"><li><div class="marker"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 14.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5z"></path></svg></div><span class="inline-wrap">多个容器之间共享数据。创建容器的时候，如果没有显示创建一个<span class="jill"></span>volume，那么它会默认创建一个，就算该容器后面被删除了，这个<span class="jill"></span>volume<span class="jill"></span>还是会存在。关于对<span class="jill"></span>volume<span class="jill"></span>的操作，请查看</span><span class="inline-wrap"><code>docker volume --help</code></span></li><li><div class="marker"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 14.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5z"></path></svg></div><span class="inline-wrap">当<span class="jill"></span>Docker<span class="jill"></span>宿主不能保证一定能提供所需的文件或目录时</span></li><li><div class="marker"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 14.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5z"></path></svg></div><span class="inline-wrap">需要把数据存储在非<span class="jill"></span>Docker<span class="jill"></span>宿主环境，例如远程服务器等等</span></li><li><div class="marker"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 14.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5z"></path></svg></div><span class="inline-wrap">当你需要对数据进行备份、迁移等等，volumes<span class="jill"></span>是个不错的选择</span></li></ul><h3 class="wolai-block"><span class="inline-wrap">什么时候用<span class="jill"></span>bind mounts</span></h3><div class="wolai-block wolai-text"><div><span class="inline-wrap">其实<span class="jill"></span>bind mounts<span class="jill"></span>是个老东西<span class="jill"></span>0.0</span></div></div><h3 class="wolai-block"><span class="inline-wrap">什么时候用<span class="jill"></span>tmpfs mounts</span></h3><div class="wolai-block wolai-text"><div><span class="inline-wrap"><code>tmpfs</code></span><span class="inline-wrap"> mounts are best used for cases when you do not want the data to persist either on the host machine or within the container. </span></div></div><h2 class="wolai-block"><span class="inline-wrap">volumes</span></h2><div class="wolai-block wolai-text"><div><span class="inline-wrap">对于<span class="jill"></span>volumes<span class="jill"></span>的操作，主要有三个命令，一个是</span><span class="inline-wrap"><code>docker volume</code></span><span class="inline-wrap"> 用来管理<span class="jill"></span>volume。另外是</span><span class="inline-wrap"><code>--mount</code></span><span class="inline-wrap">和</span><span class="inline-wrap"><code>-v 、--volume</code></span></div></div><div class="wolai-block wolai-text"><div><span class="inline-wrap">推荐用</span><span class="inline-wrap"><code>--mount</code></span><span class="inline-wrap">所以不讲</span><span class="inline-wrap"><code>-v、--volume</code></span></div></div><div class="wolai-block wolai-text"><div><span class="inline-wrap"><code>--mount</code></span><span class="inline-wrap">后面接收的是一组键值对</span></div></div><ul class="wolai-block"><li><div class="marker"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 14.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5z"></path></svg></div><span class="inline-wrap">type=bind、volume、tmpfs</span></li><li><div class="marker"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 14.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5z"></path></svg></div><span class="inline-wrap">source=volume<span class="jill"></span>名称</span></li><li><div class="marker"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 14.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5z"></path></svg></div><span class="inline-wrap">target=容器内路径</span></li><li><div class="marker"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 14.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5z"></path></svg></div><span class="inline-wrap">readonly=</span></li><li><div class="marker"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 14.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5z"></path></svg></div><span class="inline-wrap">volume-opt=</span></li></ul><div class="wolai-block wolai-text"><div><span class="inline-wrap"><b>例子</b></span></div></div><code-block class="wolai-block"><div class="wolai-pre"><div data-lang="Bash" class="marker"></div><pre><span class="token comment"># 使用--mount</span>
+docker container run -dit --name redis-master --mount <span class="token assign-left variable">type</span><span class="token operator">=</span>volume,source<span class="token operator">=</span>redis-config,target<span class="token operator">=</span>/redis/config --network redis-network redis
+<span class="token comment"># 可以在/var/lib/docker/volumes查看创建的volume</span></pre></div></code-block><div class="wolai-block wolai-text"><div><span class="inline-wrap"><a href="https://docs.docker.com/storage/"><span>Manage application data</span></a></span></div></div><div class="wolai-block wolai-text"><div><span class="inline-wrap"><a href="https://stackoverflow.com/questions/28302178/how-can-i-add-a-volume-to-an-existing-docker-container"><span>How can I add a volume to an existing Docker container?</span></a></span></div></div><div class="wolai-block wolai-text"><div><span class="inline-wrap">¡</span></div></div><div class="wolai-block wolai-text"><div></div></div></article><footer></footer></body></html>

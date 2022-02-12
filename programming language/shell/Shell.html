@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="zh-Hans-CN"><head><meta charset="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=Edge"/><link rel="stylesheet" type="text/css" href="../../css/modern-norm.min.css"/><link rel="stylesheet" type="text/css" href="../../css/prism.min.css"/><link rel="stylesheet" type="text/css" href="../../css/katex.min.css"/><link rel="stylesheet" type="text/css" href="../../css/wolai.css"/><title>Shell - wolai 笔记</title><link rel="shortcut icon"></link></head><body><header><div class="image"></div><div class="title"><div class="banner"><div class="icon"></div></div><div data-title="Shell" class="main-title"></div></div></header><article><h2 class="wolai-block"><span class="inline-wrap">HelloWorld</span></h2><code-block class="wolai-block"><div class="wolai-pre"><div data-lang="Bash" class="marker"></div><pre><span class="token shebang important">#!/bin/bash</span>
+
+<span class="token builtin class-name">echo</span> <span class="token string">"hello world"</span></pre></div></code-block><h2 class="wolai-block"><span class="inline-wrap">变量声明</span></h2><code-block class="wolai-block"><div class="wolai-pre"><div data-lang="Bash" class="marker"></div><pre><span class="token shebang important">#!/bin/bash</span>
+
+<span class="token comment"># 变量声明:变量名和变量值之间用等号紧紧相连，之间没有空格</span>
+<span class="token assign-left variable">age</span><span class="token operator">=</span><span class="token number">18</span>
+
+<span class="token comment"># 变量的作用域：shell变量的作用域分为全局变量和局部变量</span>
+
+<span class="token comment"># 全局变量：一旦被声明，就可以在声明之后的所有位置使用</span>
+<span class="token builtin class-name">echo</span> <span class="token variable">$name</span>
+<span class="token keyword">function</span> <span class="token function-name function">greet</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token assign-left variable">name</span><span class="token operator">=</span><span class="token string">"hello"</span>
+    <span class="token builtin class-name">echo</span> <span class="token variable">$name</span>
+<span class="token punctuation">}</span>
+greet
+<span class="token builtin class-name">echo</span> <span class="token variable">$name</span> <span class="token comment"># 虽然name是在函数greet中定义的，但是这里也能用(有点违反常识哈)</span>
+
+<span class="token comment"># 局部变量：使用local修饰的变量，只会存在声明时所在的作用域（主要是用于函数内）</span>
+<span class="token assign-left variable">name</span><span class="token operator">=</span><span class="token string">"hyc"</span>
+<span class="token keyword">function</span> <span class="token function-name function">greet</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token builtin class-name">local</span> <span class="token assign-left variable">name</span><span class="token operator">=</span><span class="token string">"hdr"</span>
+    <span class="token builtin class-name">echo</span> <span class="token variable">$name</span>
+<span class="token punctuation">}</span>
+greet
+<span class="token builtin class-name">echo</span> <span class="token variable">$name</span> <span class="token comment"># 可以看到局部变量的修改，不会影响其它作用域同名的变量</span>
+
+<span class="token comment"># 变量的继承：通过export修饰的变量，可以传递给子shell脚本</span>
+<span class="token builtin class-name">export</span> <span class="token assign-left variable">age</span><span class="token operator">=</span><span class="token number">18</span>
+<span class="token builtin class-name">export</span> name
+
+<span class="token comment"># 取消变量：通过unset命令可以将变量从内存中释放</span>
+<span class="token builtin class-name">unset</span> age <span class="token comment"># unset 也能用户释放函数</span>
+
+<span class="token comment"># 常量：通过readonly修饰的变量，不允许被修改</span>
+<span class="token builtin class-name">readonly</span> name
+<span class="token builtin class-name">readonly</span> <span class="token assign-left variable">wife</span><span class="token operator">=</span>zjf
+<span class="token assign-left variable">name</span><span class="token operator">=</span>hdr <span class="token comment"># 此处Shell会报错</span>
+
+<span class="token comment"># 命令结果赋值：把命令的标准输出赋值给变量</span>
+<span class="token comment"># $(命令) or `命令`</span>
+<span class="token comment"># $()仅在Bash Shell中有效，反引号可在多种UNIX Shell中使用</span>
+<span class="token assign-left variable">cur_dir</span><span class="token operator">=</span><span class="token variable"><span class="token variable">$(</span><span class="token builtin class-name">pwd</span><span class="token variable">)</span></span>
+<span class="token assign-left variable">hostname</span><span class="token operator">=</span><span class="token variable"><span class="token variable">`</span><span class="token function">hostname</span><span class="token variable">`</span></span></pre></div></code-block><h3 class="wolai-block"><span class="inline-wrap">预设变量</span></h3><h3 class="wolai-block"><span class="inline-wrap">特殊变量</span></h3><code-block class="wolai-block"><div class="wolai-pre"><div data-lang="Bash" class="marker"></div><pre><span class="token variable">$0</span> <span class="token comment"># 脚本名称</span>
+<span class="token variable">$1</span> <span class="token comment"># 第一个程序参数 $2 ...</span>
+<span class="token variable">$?</span> <span class="token comment"># 上一个脚本/命令的返回值</span>
+<span class="token variable">$*</span> <span class="token comment"># 表示脚本的所有入参</span></pre></div></code-block><h2 class="wolai-block"><span class="inline-wrap">函数声明</span></h2><code-block class="wolai-block"><div class="wolai-pre"><div data-lang="Bash" class="marker"></div><pre><span class="token keyword">function</span> <span class="token function-name function">func_name</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token comment"># 不支持入参</span>
+  <span class="token comment"># 返回值:执行正常返回0,错误返回非0</span>
+  <span class="token builtin class-name">return</span> <span class="token number">0</span>
+<span class="token punctuation">}</span></pre></div></code-block><aside class="bg-cultured wolai-block"><div data-symbol="💥" class="icon"></div><span class="inline-wrap">shell<span class="jill"></span>的函数不支持入参和非数字类型的返回值，所以只能通过函数外部变量进行参数和结果传递</span></aside><h2 class="wolai-block"><span class="inline-wrap">字符串</span></h2><code-block class="wolai-block"><div class="wolai-pre"><div data-lang="Bash" class="marker"></div><pre><span class="token comment"># 可以通过双引号和单引号声明字符串</span>
+<span class="token comment"># 双引号声明的字符串，里面的$符、反引号（`）、转义符（\）这3种特殊字符依然会被解析为特殊意义</span>
+<span class="token comment"># 单引号声明的字符串不会做任何特殊解析</span>
+<span class="token assign-left variable">name</span><span class="token operator">=</span><span class="token string">"hyc"</span>
+<span class="token assign-left variable">greet_1</span><span class="token operator">=</span><span class="token string">"hello <span class="token variable">${name}</span>"</span>
+<span class="token assign-left variable">greet_2</span><span class="token operator">=</span><span class="token string">'hello ${name}'</span>
+<span class="token assign-left variable">greet_3</span><span class="token operator">=</span><span class="token string">"hello <span class="token variable">${name}</span> 'hello <span class="token variable">${name}</span>'"</span>
+<span class="token assign-left variable">greet_4</span><span class="token operator">=</span><span class="token string">'hello ${name} "hello ${name}"'</span>
+<span class="token builtin class-name">echo</span> <span class="token variable">${greet_1}</span>
+<span class="token builtin class-name">echo</span> <span class="token variable">${greet_2}</span>
+<span class="token builtin class-name">echo</span> <span class="token variable">${greet_3}</span>
+<span class="token builtin class-name">echo</span> <span class="token variable">${greet_4}</span>
+</pre></div></code-block><aside class="bg-cultured wolai-block"><div data-symbol="😈" class="icon"></div><span class="inline-wrap">Shell<span class="jill"></span>脚本其实只支持字符串类型，虽然你可以定义</span><span class="inline-wrap"><code>a=1</code></span><span class="inline-wrap">，但是其实</span><span class="inline-wrap"><code>1</code></span><span class="inline-wrap">会被当做字符串处理，也就是</span><span class="inline-wrap"><code>b=${a}+1</code></span><span class="inline-wrap">，</span><span class="inline-wrap"><code>b</code></span><span class="inline-wrap">存储的是</span><span class="inline-wrap"><code>1+1</code></span><span class="inline-wrap">
+如果想要</span><span class="inline-wrap"><code>a=1+1</code></span><span class="inline-wrap">，</span><span class="inline-wrap"><code>a</code></span><span class="inline-wrap">存储的是</span><span class="inline-wrap"><code>2</code></span><span class="inline-wrap">，要怎么操作？</span><span class="inline-wrap"><code>a=$((1+1))</code></span></aside><blockquote class="bg-cultured wolai-block"><span class="inline-wrap">${var}<span class="jill"></span>返回的是变量值
+$(命令)返回的是命令的</span><span class="inline-wrap"><code>标准输出</code></span><span class="inline-wrap">
+$((expr))返回的算术表达式的</span><span class="inline-wrap"><code>计算结果</code></span><span class="inline-wrap">
+$?返回的是脚本/命令的</span><span class="inline-wrap"><code>返回值</code></span></blockquote><h2 class="wolai-block"><span class="inline-wrap">数组</span></h2><div class="wolai-block wolai-text"><div><span class="inline-wrap"></span><br/></div></div><h2 class="wolai-block"><span class="inline-wrap">流程控制</span></h2><h3 class="wolai-block"><span class="inline-wrap">if<span class="jill"></span>条件语句</span></h3><code-block class="wolai-block"><div class="wolai-pre"><div data-lang="Bash" class="marker"></div><pre><span class="token keyword">if</span> expression<span class="token punctuation">;</span> <span class="token keyword">then</span>
+   command1
+   command2
+<span class="token keyword">elif</span> expression2<span class="token punctuation">;</span> <span class="token keyword">then</span>
+   command3
+   command4
+<span class="token keyword">else</span>
+   command5
+   command6   
+<span class="token keyword">fi</span>
+</pre></div></code-block><h3 class="wolai-block"><span class="inline-wrap">case<span class="jill"></span>条件语句</span></h3><code-block class="wolai-block"><div class="wolai-pre"><div data-lang="Bash" class="marker"></div><pre><span class="token keyword">case</span> var <span class="token keyword">in</span>
+var1<span class="token punctuation">)</span> command1 <span class="token punctuation">;</span><span class="token punctuation">;</span>
+var2<span class="token punctuation">)</span> command2 <span class="token punctuation">;</span><span class="token punctuation">;</span>
+<span class="token punctuation">..</span>.
+*<span class="token punctuation">)</span> commandx <span class="token punctuation">;</span><span class="token punctuation">;</span>
+<span class="token keyword">esac</span></pre></div></code-block><h3 class="wolai-block"><span class="inline-wrap">test</span></h3><code-block class="wolai-block"><div class="wolai-pre"><div data-lang="Bash" class="marker"></div><pre><span class="token comment"># [ expression ]</span>
+</pre></div></code-block><details class="wolai-block"><summary><div class="marker"></div><span class="inline-wrap">文件测试</span></summary><code-block class="wolai-block"><div class="wolai-pre"><div data-lang="Bash" class="marker"></div><pre><span class="token comment"># 测试文件/文件夹是否存在</span>
+<span class="token keyword">if</span> <span class="token punctuation">[</span> -e <span class="token string">"/usr/bin/java"</span> <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
+   java -version
+<span class="token keyword">fi</span></pre></div></code-block><div class="wolai-block wolai-center"><figure><img src="media/image.png" style="width: 731px"/></figure></div></details><details class="wolai-block"><summary><div class="marker"></div><span class="inline-wrap">字符串测试</span></summary><code-block class="wolai-block"><div class="wolai-pre"><div data-lang="Bash" class="marker"></div><pre><span class="token assign-left variable">name</span><span class="token operator">=</span><span class="token variable">$1</span>
+<span class="token keyword">if</span> <span class="token punctuation">[</span> -z <span class="token string">"<span class="token variable">${name}</span>"</span> <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span> <span class="token comment"># 尽量不要直接用${}，而是用"${}"</span>
+   <span class="token builtin class-name">echo</span> <span class="token string">"please enter your name"</span>
+<span class="token keyword">fi</span></pre></div></code-block><div class="wolai-block wolai-center"><figure><img src="media/image_1.png" style="width: 731px"/></figure></div></details><details class="wolai-block"><summary><div class="marker"></div><span class="inline-wrap">整数比较</span></summary><code-block class="wolai-block"><div class="wolai-pre"><div data-lang="Bash" class="marker"></div><pre><span class="token assign-left variable">age</span><span class="token operator">=</span><span class="token number">160</span>
+<span class="token keyword">if</span> <span class="token punctuation">[</span> -n <span class="token string">"<span class="token variable">${age}</span>"</span> <span class="token punctuation">]</span> <span class="token operator">&amp;&amp;</span> <span class="token punctuation">[</span> <span class="token string">"<span class="token variable">${age}</span>"</span> -gt <span class="token number">150</span> <span class="token punctuation">]</span> <span class="token punctuation">;</span> <span class="token keyword">then</span>
+   <span class="token builtin class-name">echo</span> <span class="token string">"are you fucking kidding me?"</span>
+<span class="token keyword">fi</span></pre></div></code-block><div class="wolai-block wolai-center"><figure><img src="media/image_2.png" style="width: 731px"/></figure></div></details><h3 class="wolai-block"><span class="inline-wrap">for<span class="jill"></span>循环</span></h3><code-block class="wolai-block"><div class="wolai-pre"><div data-lang="Bash" class="marker"></div><pre><span class="token keyword">for</span> <span class="token for-or-select variable">var</span> <span class="token keyword">in</span> list
+<span class="token keyword">do</span> 
+    <span class="token builtin class-name">command</span>
+<span class="token keyword">done</span>
+<span class="token comment"># --------------------------------------------------------------------------------</span>
+<span class="token keyword">for</span> <span class="token for-or-select variable">fruit</span> <span class="token keyword">in</span> apple orange banana pear
+<span class="token keyword">do</span>
+    <span class="token builtin class-name">echo</span> <span class="token variable">${fruit}</span>
+<span class="token keyword">done</span>
+<span class="token builtin class-name">echo</span> no <span class="token function">more</span> fruits
+<span class="token comment"># --------------------------------------------------------------------------------</span>
+<span class="token assign-left variable">fruits</span><span class="token operator">=</span><span class="token string">"apple orange banana pear"</span>
+<span class="token keyword">for</span> <span class="token for-or-select variable">fruit</span> <span class="token keyword">in</span> <span class="token variable">${fruits}</span>
+<span class="token keyword">do</span>
+  <span class="token builtin class-name">echo</span> <span class="token variable">${fruit}</span>
+<span class="token keyword">done</span>
+<span class="token comment"># --------------------------------------------------------------------------------</span>
+<span class="token keyword">for</span> <span class="token variable"><span class="token punctuation">((</span>i<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>i<span class="token operator">&lt;</span><span class="token number">10</span><span class="token punctuation">;</span>i<span class="token operator">++</span><span class="token punctuation">))</span></span> <span class="token comment"># for后面的空格很重要</span>
+<span class="token keyword">do</span>
+    <span class="token builtin class-name">echo</span> <span class="token variable">${i}</span>
+<span class="token keyword">done</span></pre></div></code-block><aside class="bg-cultured wolai-block"><div data-symbol="💥" class="icon"></div><span class="inline-wrap">目前看来，就变量声明不能有空格，其它东西都是需要空格的</span></aside><h3 class="wolai-block"><span class="inline-wrap">while<span class="jill"></span>循环</span></h3><code-block class="wolai-block"><div class="wolai-pre"><div data-lang="Bash" class="marker"></div><pre><span class="token keyword">while</span> expresiion
+<span class="token keyword">do</span>
+    <span class="token builtin class-name">command</span>
+<span class="token keyword">done</span>
+<span class="token comment"># -------------------------------------------------------------------------</span>
+<span class="token assign-left variable">count</span><span class="token operator">=</span><span class="token string">"0"</span>
+<span class="token keyword">while</span> <span class="token punctuation">[</span> <span class="token string">"<span class="token variable">${count}</span>"</span> -ne <span class="token string">"100"</span> <span class="token punctuation">]</span>
+<span class="token keyword">do</span>
+  <span class="token assign-left variable">count</span><span class="token operator">=</span><span class="token variable"><span class="token variable">$((</span>count<span class="token operator">+</span><span class="token number">1</span><span class="token variable">))</span></span>
+  <span class="token builtin class-name">echo</span> <span class="token string">"count=<span class="token variable">${count}</span> count++"</span>
+<span class="token keyword">done</span>
+<span class="token comment"># -------------------------------------------------------------------------</span>
+<span class="token keyword">while</span> <span class="token boolean">true</span>
+<span class="token keyword">do</span>
+    <span class="token builtin class-name">command</span>
+<span class="token keyword">done</span></pre></div></code-block><div class="wolai-block wolai-text"><div></div></div><h2 class="wolai-block"><span class="inline-wrap">IO</span></h2><h3 class="wolai-block"><span class="inline-wrap">用户输入</span></h3><code-block class="wolai-block"><div class="wolai-pre"><div data-lang="Bash" class="marker"></div><pre><span class="token builtin class-name">read</span> var
+<span class="token comment"># ----------------------------------------------------------------------</span>
+<span class="token builtin class-name">echo</span> <span class="token string">"please enter you name?"</span>
+<span class="token builtin class-name">read</span> name
+<span class="token builtin class-name">echo</span> <span class="token string">"your name is <span class="token variable">${name}</span>"</span></pre></div></code-block><h3 class="wolai-block"><span class="inline-wrap">用户选择</span></h3><code-block class="wolai-block"><div class="wolai-pre"><div data-lang="Bash" class="marker"></div><pre><span class="token keyword">select</span> <span class="token for-or-select variable">var</span> <span class="token keyword">in</span> list
+<span class="token keyword">do</span>
+  <span class="token builtin class-name">command</span>
+<span class="token keyword">done</span>
+<span class="token comment"># ----------------------------------------------------------------------</span>
+<span class="token keyword">select</span> <span class="token for-or-select variable">DAY</span> <span class="token keyword">in</span> Mon Tue Wed
+<span class="token keyword">do</span>
+  <span class="token builtin class-name">echo</span> <span class="token string">"<span class="token variable">${DAY}</span>"</span>
+  <span class="token builtin class-name">break</span> <span class="token comment"># 如果不break的，会让一直让用户做选择</span>
+<span class="token keyword">done</span></pre></div></code-block><h3 class="wolai-block"><span class="inline-wrap">输出
+</span></h3><code-block class="wolai-block"><div class="wolai-pre"><div data-lang="Bash" class="marker"></div><pre><span class="token builtin class-name">echo</span> <span class="token string">"content"</span></pre></div></code-block><h3 class="wolai-block"><span class="inline-wrap">重定向</span></h3><div class="wolai-block wolai-text"><div><span class="inline-wrap">标准输出覆盖重定向：&gt; 把程序的输出重定向输出到其它文件中，会覆盖文件原有内容</span></div></div><div class="wolai-block wolai-text"><div><span class="inline-wrap">标准输出追加重定向：&gt;&gt; 把程序的输出重定向输出到其它文件中，不会覆盖文件原有内容</span></div></div><div class="wolai-block wolai-text"><div><span class="inline-wrap">标识输出重定向：&gt;&amp; 将一个标识的输出重定向到另一个标识的输入</span></div></div><code-block class="wolai-block"><div class="wolai-pre"><div data-lang="Bash" class="marker"></div><pre><span class="token comment"># 将标准输出和标准错误同时定向到同一个文件中</span>
+<span class="token builtin class-name">command</span> <span class="token operator">></span> stdout_stderr.txt <span class="token operator"><span class="token file-descriptor important">2</span>></span><span class="token file-descriptor important">&amp;1</span></pre></div></code-block><div class="wolai-block wolai-text"><div><span class="inline-wrap">标准输入重定向：&lt; 将原本应由从标准输入设备中读取的内容转由文件内容输入(</span><span class="bg-lavender_blue inline-wrap">感觉不是很实用</span><span class="inline-wrap">)</span></div></div><div class="wolai-block wolai-text"><div><span class="inline-wrap">管道：|<span class="jill"></span>把一个程序的输出作为另一个程序的输入</span></div></div><code-block class="wolai-block"><div class="wolai-pre"><div data-lang="Bash" class="marker"></div><pre><span class="token function">cat</span> book.txt <span class="token operator">|</span> <span class="token function">less</span></pre></div></code-block><h3 class="wolai-block"><span class="inline-wrap">exec</span></h3><div class="wolai-block wolai-text"><div><span class="inline-wrap">exec<span class="jill"></span>是<span class="jill"></span>Shell<span class="jill"></span>的内建命令，执行这个命令时系统不会启动新的<span class="jill"></span>Shell，而是用要被执行的命令替换当前的<span class="jill"></span>Shell<span class="jill"></span>进程。因此假设在一个<span class="jill"></span>Shell<span class="jill"></span>中执行<span class="jill"></span>exec ls，则在列出当前目录后该<span class="jill"></span>Shell<span class="jill"></span>进程将会主动退出</span></div></div><div class="wolai-block wolai-text"><div><span class="inline-wrap"></span><br/></div></div><h2 class="wolai-block"><span class="inline-wrap">文本处理工具 </span><span class="inline-wrap">TODO</span></h2><ul class="wolai-block"><li><div class="marker"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 14.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5z"></path></svg></div><span class="inline-wrap">文件查找</span><span class="inline-wrap">、</span><span class="inline-wrap">压缩、打包</span></li><li><div class="marker"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 14.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5z"></path></svg></div><span class="inline-wrap">文本处理：grep、</span><span class="inline-wrap"><del>sort</del></span><span class="inline-wrap">、uniq、cu、tr、split、paste、sed、awk</span></li></ul><details class="wolai-block"><summary><div class="marker"></div><span class="inline-wrap">sort：多行数据排序</span></summary><div class="wolai-block wolai-text"><div><span class="inline-wrap">Sort<span class="jill"></span>命令可以用于对多行数据进行排序</span></div></div><code-block class="wolai-block"><div class="wolai-pre"><div data-lang="Bash" class="marker"></div><pre><span class="token function">sort</span> <span class="token punctuation">[</span>-tknr<span class="token punctuation">]</span> 文件名
+<span class="token comment"># -t指定分隔符(把一行分割成多列)</span>
+<span class="token comment"># -k指定使用第几列来排序</span>
+<span class="token comment"># -n采取数字排序</span>
+<span class="token comment"># -r反向排序</span>
+<span class="token comment"># ------------------------------------------------------------------</span>
+<span class="token function">cat</span> user_phonenumbers.txt <span class="token operator">|</span> <span class="token function">sort</span> -t <span class="token string">":"</span> -k <span class="token number">2</span> -n</pre></div></code-block></details><details class="wolai-block"><summary><div class="marker"></div><span class="inline-wrap">uniq：删除</span><span class="bg-uranian_blue inline-wrap">连续</span><span class="inline-wrap">的完全一致的行（也就是要先排好序）</span></summary><code-block class="wolai-block"><div class="wolai-pre"><div data-lang="Bash" class="marker"></div><pre><span class="token function">uniq</span> <span class="token punctuation">[</span>-ic<span class="token punctuation">]</span>
+<span class="token comment"># -i忽略大小写</span>
+<span class="token comment"># -c显示重复行数</span>
+<span class="token function">cat</span> user_phonenumbers.txt <span class="token operator">|</span> <span class="token function">sort</span> -t <span class="token string">":"</span> -k <span class="token number">2</span> -n <span class="token operator">|</span> <span class="token function">uniq</span> -i -c</pre></div></code-block></details><details class="wolai-block"><summary><div class="marker"></div><span class="inline-wrap">cut：展示指定列</span></summary><code-block class="wolai-block"><div class="wolai-pre"><div data-lang="Bash" class="marker"></div><pre>cur <span class="token punctuation">[</span>-df<span class="token punctuation">]</span>
+<span class="token comment"># -d指定列的分割符 delimiter</span>
+<span class="token comment"># -f展示第几列</span>
+<span class="token comment"># ------------------------------------------------</span>
+<span class="token function">cat</span> user_phonenumbers.txt <span class="token operator">|</span> <span class="token function">cut</span> -d <span class="token string">":"</span> -f <span class="token number">2</span>
+</pre></div></code-block></details><details class="wolai-block"><summary><div class="marker placeholder"></div><span class="inline-wrap">tr：</span></summary></details><details class="wolai-block"><summary><div class="marker placeholder"></div><span class="inline-wrap">paste：</span></summary></details><details class="wolai-block"><summary><div class="marker placeholder"></div><span class="inline-wrap">split：</span></summary></details><div class="wolai-block wolai-text"><div><span class="inline-wrap"></span><br/></div></div><div class="wolai-block wolai-text"><div><span class="inline-wrap"></span><br/></div></div><h2 class="wolai-block"><span class="inline-wrap">实战 </span><span class="inline-wrap">TODO</span></h2><div class="wolai-block wolai-text"><div><span class="inline-wrap"></span><br/></div></div><div class="wolai-block wolai-text"><div><span class="inline-wrap"></span><br/></div></div><h2 class="wolai-block"><span class="inline-wrap">其它命令行工具 </span><span class="inline-wrap">TODO</span></h2><div class="wolai-block wolai-text"><div><span class="inline-wrap"></span><br/></div></div><div class="wolai-block wolai-text"><div><span class="inline-wrap"></span><br/></div></div><blockquote class="wolai-block"><span class="inline-wrap">《Linux<span class="jill"></span>系统命令及<span class="jill"></span>Shell<span class="jill"></span>脚本实践指南》</span></blockquote></article><footer></footer></body></html>
