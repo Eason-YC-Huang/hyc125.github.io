@@ -104,7 +104,7 @@ ctx<span class="token punctuation">.</span><span class="token function">refresh<
 <span class="token annotation punctuation">@Configuration</span>
 <span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">AppConfig</span> <span class="token punctuation">{</span>
 
-    <span class="token annotation punctuation">@Bean</span><span class="token punctuation">(</span>initMethod <span class="token operator">=</span> <span class="token string">"init"</span><span class="token punctuation">,</span>destroyMethod <span class="token operator">=</span> <span class="token string">"cleanup"</span><span class="token punctuation">)</span>
+    <span class="token annotation punctuation">@Bean</span><span class="token punctuation">(</span>initMethod <span class="token operator">=</span> <span class="token string">"init"</span><span class="token punctuation">,</span> destroyMethod <span class="token operator">=</span> <span class="token string">"cleanup"</span><span class="token punctuation">)</span>
     <span class="token keyword">public</span> <span class="token class-name">Bean</span> <span class="token function">bean</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
         <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">Bean</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
@@ -169,7 +169,8 @@ ctx<span class="token punctuation">.</span><span class="token function">refresh<
 
   <span class="token annotation punctuation">@Component</span>
   <span class="token keyword">class</span> <span class="token class-name">StudentServices</span> <span class="token punctuation">{</span>
-    <span class="token annotation punctuation">@Lookup</span> <span class="token comment">// 逻辑上该方法被替换为 ctx.getBean(SchoolNotification.class)</span>
+    <span class="token comment">// 逻辑上该方法被替换为 ctx.getBean(SchoolNotification.class)</span>
+    <span class="token annotation punctuation">@Lookup</span>
     <span class="token keyword">public</span> <span class="token class-name">SchoolNotification</span> <span class="token function">getNotification</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
       <span class="token keyword">return</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
