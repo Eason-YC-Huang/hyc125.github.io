@@ -24,6 +24,7 @@
   --wolai-code-node-bg: #F6F5F5;
   --wolai-code-node-color: #333940;
   --wolai-desc-color: #BCB3B3;
+  --wolai-caption-color: #8E8E8E;
   --wolai-hover-bg: #EEECEC;
   --wolai-inline-code-background: rgba(208, 187, 193, 0.2);
   --wolai-inline-code-color: rgb(85, 142, 218);
@@ -88,6 +89,7 @@
     --wolai-code-node-bg: #282A36;
     --wolai-code-node-color: #F8F8F2;
     --wolai-desc-color: #8F8F8F;
+    --wolai-caption-color: #909090;
     --wolai-hover-bg: #2C2C2F;
     --wolai-inline-code-background: rgba(208, 187, 193, 0.2);
     --wolai-inline-code-color: #84AADC;
@@ -127,7 +129,7 @@
   }
 }
 :root {
-  --wolai-normal-font: "zh quote", -apple-system, BlinkMacSystemFont, "PingFang SC", "Noto Sans", "Noto Sans CJK SC", "Microsoft YaHei", 微软雅黑, sans-serif, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --wolai-normal-font: ""Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji", zh quote", -apple-system, BlinkMacSystemFont, "PingFang SC", "Noto Sans", "Noto Sans CJK SC", "Microsoft YaHei", 微软雅黑, sans-serif, "Segoe UI", Roboto, "Helvetica Neue", Arial;
   --wolai-mono-font: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
   --wolai-serif-font: "zh question mark", "Times New Roman", "Songti SC", STSong, NSimSun, SimSun, FangSong, "Nanum Myeongjo", NanumMyeongjo, Batang, serif !important;
   --wolai-kai-font: "zh question mark", "Times New Roman", "Kaiti SC", STKaiti, KaiTi !important;
@@ -417,7 +419,7 @@ figure>img { display: block; max-width: 100%;
 figure>figcaption{
   padding: 10px 5px;
   text-align: inherit;
-  color: var(--color-basic-600);
+  color: var(--wolai-caption-color);
 }
 figure>figcaption{
   font-size: 14px;
@@ -442,7 +444,7 @@ body.small-font.more-lead figure>figcaption{
 table>caption{
   padding: 10px 5px;
   text-align: inherit;
-  color: var(--color-basic-600);
+  color: var(--wolai-caption-color);
 }
 table>caption{
   font-size: 14px;
@@ -467,7 +469,7 @@ body.small-font.more-lead table>caption{
 code-block>figcaption{
   padding: 10px 5px;
   text-align: inherit;
-  color: var(--color-basic-600);
+  color: var(--wolai-caption-color);
 }
 code-block>figcaption{
   font-size: 14px;
