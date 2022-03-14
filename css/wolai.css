@@ -1802,3 +1802,4 @@ article .bg-lightpink { background-color: var(--wolai-color-lightpink); }
 
     }
     
+details > summary::-webkit-details-marker {display: none;} <!-- 隐藏箭头 -->
